@@ -206,6 +206,7 @@ export const equipos = {
 export const atencion = {
   id: "atencion",
   headline: "Atención especializada, de principio a fin",
+  cta: { label: "Agenda tu cita", href: siteConfig.ctaHref },
   cards: [
     {
       title: "Consulta médica",

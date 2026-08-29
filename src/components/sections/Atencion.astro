@@ -1,0 +1,38 @@
+---
+import { atencion } from "@content/content";
+import MotionReveal from "@components/islands/MotionReveal";
+---
+
+<section
+  id={atencion.id}
+  class="atencion bg-brand-neutral-mist py-10 md:py-12 lg:py-14"
+  aria-labelledby="atencion-heading"
+>
+  <div class="container">
+    <MotionReveal client:visible variant="up" className="mx-auto max-w-3xl text-center">
+      <h2
+        id="atencion-heading"
+        class="text-[1.65rem] font-bold leading-[1.2] tracking-tight text-brand-navy xs:text-[1.85rem] sm:text-[2.05rem] md:text-[2.25rem] lg:text-[2.5rem]"
+      >
+        {atencion.headline}
+      </h2>
+    </MotionReveal>
+
+    <div class="mt-8 grid grid-cols-1 gap-4 sm:mt-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+      {
+        atencion.cards.map((card, index) => (
+          <MotionReveal client:visible variant="up" delay={index * 0.06}>
+            <article class="h-full rounded-[1.25rem] border border-[#D5D1EA] bg-white px-6 py-7 sm:rounded-[1.4rem] sm:px-7 sm:py-8">
+              <h3 class="text-xl font-bold tracking-tight text-brand-navy sm:text-[1.35rem]">
+                {card.title}
+              </h3>
+              <p class="mt-3 text-sm leading-[1.6] text-text-muted sm:text-[0.95rem]">
+                {card.body}
+              </p>
+            </article>
+          </MotionReveal>
+        ))
+      }
+    </div>
+  </div>
+</section>

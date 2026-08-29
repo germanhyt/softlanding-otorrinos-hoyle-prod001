@@ -1,0 +1,44 @@
+---
+import { tecnologia } from "@content/content";
+import MotionReveal from "@components/islands/MotionReveal";
+---
+
+<section
+  id={tecnologia.id}
+  class="tecnologia bg-brand-neutral-mist pt-10 md:pt-12 lg:pt-14"
+  aria-labelledby="tecnologia-heading"
+>
+  <div class="container grid items-center gap-10 pb-6 md:grid-cols-2 md:gap-12 md:pb-8 lg:gap-16">
+    <MotionReveal client:visible variant="left" className="max-w-xl">
+      <h2
+        id="tecnologia-heading"
+        class="text-[1.65rem] font-bold leading-[1.2] tracking-tight text-brand-navy xs:text-[1.85rem] sm:text-[2.05rem] md:text-[2.2rem] lg:text-[2.45rem]"
+      >
+        {tecnologia.headline}
+      </h2>
+      <p class="mt-6 text-[0.95rem] leading-[1.65] text-text-soft sm:text-base md:mt-8 md:text-[1.05rem] md:leading-[1.7]">
+        {tecnologia.body}
+      </p>
+    </MotionReveal>
+
+    <MotionReveal client:visible variant="right" delay={0.08}>
+      <div class="tecnologia-photo overflow-hidden rounded-[1.35rem] sm:rounded-[1.6rem]">
+        <img
+          src={tecnologia.image.src}
+          alt={tecnologia.image.alt}
+          class="aspect-[16/10] h-full w-full object-cover md:aspect-auto md:min-h-[20rem] lg:min-h-[24rem]"
+          width="960"
+          height="640"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    </MotionReveal>
+  </div>
+</section>
+
+<style>
+  .tecnologia-photo {
+    box-shadow: 0 18px 40px rgb(13 17 70 / 0.12);
+  }
+</style>

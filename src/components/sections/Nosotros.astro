@@ -1,0 +1,50 @@
+---
+import { nosotros } from "@content/content";
+import MotionReveal from "@components/islands/MotionReveal";
+---
+
+<section
+  id={nosotros.id}
+  class="nosotros relative z-0 bg-brand-neutral-fog"
+  aria-labelledby="nosotros-heading"
+>
+  <div
+    class="container grid items-center gap-10 pb-10 md:grid-cols-2 md:gap-12 md:pb-12 lg:gap-16 lg:pb-14 xl:gap-20"
+  >
+    <MotionReveal client:visible variant="left" className="max-w-xl">
+      <h2
+        id="nosotros-heading"
+        class="text-[1.65rem] font-bold leading-[1.2] tracking-tight text-brand-navy xs:text-[1.85rem] sm:text-[2.05rem] md:text-[2.2rem] lg:text-[2.45rem]"
+      >
+        {nosotros.headline}
+      </h2>
+      {
+        nosotros.paragraphs.map((paragraph) => (
+          <p class="mt-5 text-[0.95rem] leading-[1.65] text-text-soft sm:text-base md:mt-6 md:text-[1.05rem] md:leading-[1.7]">
+            {paragraph}
+          </p>
+        ))
+      }
+    </MotionReveal>
+
+    <MotionReveal client:visible variant="right" delay={0.08}>
+      <div class="nosotros-photo overflow-hidden rounded-[1.35rem] sm:rounded-[1.6rem]">
+        <img
+          src={nosotros.image.src}
+          alt={nosotros.image.alt}
+          class="aspect-[16/10] h-full w-full object-cover object-[50%_30%] md:aspect-auto md:min-h-[22rem] lg:min-h-[26rem]"
+          width="1424"
+          height="811"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    </MotionReveal>
+  </div>
+</section>
+
+<style>
+  .nosotros-photo {
+    box-shadow: 0 18px 40px rgb(13 17 70 / 0.12);
+  }
+</style>

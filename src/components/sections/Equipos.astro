@@ -1,0 +1,45 @@
+---
+import { equipos } from "@content/content";
+import MotionReveal from "@components/islands/MotionReveal";
+---
+
+<section class="equipos bg-brand-neutral-mist pb-10 md:pb-12 lg:pb-14" aria-label={equipos.headline}>
+  <div class="container grid items-center gap-8 md:grid-cols-2 md:gap-12 lg:gap-16">
+    <MotionReveal client:visible variant="left">
+      <div class="equipos-photo overflow-hidden rounded-[1.35rem] sm:rounded-[1.6rem]">
+        <img
+          src={equipos.image.src}
+          alt={equipos.image.alt}
+          class="aspect-[16/10] h-full w-full object-cover md:aspect-auto md:min-h-[26rem] lg:min-h-[30rem]"
+          width="960"
+          height="720"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    </MotionReveal>
+
+    <div class="flex flex-col gap-3 sm:gap-4">
+      {
+        equipos.items.map((item, index) => (
+          <MotionReveal client:visible variant="right" delay={index * 0.05}>
+            <article class="rounded-[1.1rem] bg-brand-lavender px-5 py-4 sm:rounded-[1.25rem] sm:px-6 sm:py-5">
+              <h3 class="text-lg font-bold tracking-tight text-brand-navy sm:text-xl">
+                {item.title}
+              </h3>
+              <p class="mt-1.5 text-sm leading-[1.55] text-text-soft sm:text-[0.95rem]">
+                {item.body}
+              </p>
+            </article>
+          </MotionReveal>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .equipos-photo {
+    box-shadow: 0 18px 40px rgb(13 17 70 / 0.12);
+  }
+</style>

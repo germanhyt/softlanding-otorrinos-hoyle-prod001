@@ -1,0 +1,50 @@
+---
+import { alcance } from "@content/content";
+import MotionReveal from "@components/islands/MotionReveal";
+import ProceduresTabs from "@components/islands/ProceduresTabs";
+---
+
+<section
+  id={alcance.id}
+  class="alcance bg-brand-neutral-mist py-10 md:py-12 lg:py-14"
+  aria-labelledby="alcance-heading"
+>
+  <div class="container">
+    <MotionReveal client:visible variant="up" className="mx-auto max-w-3xl text-center">
+      <h2
+        id="alcance-heading"
+        class="text-[1.65rem] font-bold leading-[1.2] tracking-tight text-brand-navy xs:text-[1.85rem] sm:text-[2.05rem] md:text-[2.25rem] lg:text-[2.5rem]"
+      >
+        {alcance.headline}
+      </h2>
+      <p
+        class="mx-auto mt-4 max-w-2xl text-[0.95rem] leading-[1.65] text-text-muted sm:text-base md:mt-5 md:text-[1.05rem]"
+      >
+        {alcance.intro}
+      </p>
+    </MotionReveal>
+
+    <MotionReveal client:visible variant="up" delay={0.08} className="mt-8 sm:mt-10">
+      <ProceduresTabs
+        client:visible
+        tabs={alcance.tabs}
+        proceduresLabel={alcance.proceduresLabel}
+      />
+    </MotionReveal>
+
+    <MotionReveal client:visible variant="up" delay={0.12} className="mt-8 text-center sm:mt-10">
+      <a
+        href={alcance.cta.href}
+        class="inline-flex items-center rounded-full bg-brand-blue px-8 py-3 text-[0.95rem] font-bold text-white transition hover:bg-brand-blue-hover sm:px-9 sm:py-3.5"
+      >
+        {alcance.cta.label}
+      </a>
+    </MotionReveal>
+  </div>
+</section>
+
+<style>
+  :global(.alcance-card) {
+    box-shadow: 0 16px 40px rgb(13 17 70 / 0.08);
+  }
+</style>

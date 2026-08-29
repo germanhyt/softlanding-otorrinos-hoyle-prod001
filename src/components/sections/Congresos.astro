@@ -1,0 +1,117 @@
+---
+import { congresos } from "@content/content";
+import MotionReveal from "@components/islands/MotionReveal";
+---
+
+<section
+  id={congresos.id}
+  class="congresos bg-brand-neutral-mist py-10 md:py-12 lg:py-14"
+  aria-labelledby="congresos-heading"
+>
+  <div class="container">
+    <MotionReveal client:visible variant="up" className="mx-auto max-w-3xl text-center">
+      <h2
+        id="congresos-heading"
+        class="text-[1.65rem] font-bold leading-[1.2] tracking-tight text-brand-navy xs:text-[1.85rem] sm:text-[2.05rem] md:text-[2.25rem] lg:text-[2.5rem]"
+      >
+        {congresos.headline}
+      </h2>
+      <p class="mx-auto mt-4 max-w-2xl text-[0.95rem] leading-[1.65] text-text-muted sm:text-base md:mt-5 md:text-[1.05rem]">
+        {congresos.intro}
+      </p>
+    </MotionReveal>
+
+    <MotionReveal client:visible variant="up" delay={0.08} className="mt-8 sm:mt-10">
+      <div class="congresos-grid">
+        {
+          congresos.photos.map((photo) => (
+            <figure class:list={["congresos-cell", `is-${photo.area}`]}>
+              <img
+                src={photo.src}
+                alt={photo.alt}
+                class="h-full w-full object-cover"
+                width="720"
+                height="560"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+          ))
+        }
+      </div>
+    </MotionReveal>
+  </div>
+</section>
+
+<style>
+  .congresos-grid {
+    display: grid;
+    gap: 0.7rem;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "a a"
+      "b b"
+      "c c"
+      "d e";
+  }
+
+  .congresos-cell {
+    overflow: hidden;
+    border-radius: 1.25rem;
+    min-height: 0;
+  }
+
+  .congresos-cell img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .is-a { grid-area: a; aspect-ratio: 4 / 5; }
+  .is-b { grid-area: b; aspect-ratio: 16 / 8; }
+  .is-c { grid-area: c; aspect-ratio: 16 / 9; }
+  .is-d { grid-area: d; aspect-ratio: 3 / 4; }
+  .is-e { grid-area: e; aspect-ratio: 3 / 4; }
+
+  @media (min-width: 768px) {
+    .congresos-grid {
+      gap: 0.9rem;
+      height: min(36rem, 62vw);
+      max-height: 40rem;
+      grid-template-columns: 1.08fr 1fr 1fr;
+      grid-template-rows: repeat(10, minmax(0, 1fr));
+      grid-template-areas:
+        "a b b"
+        "a b b"
+        "a b b"
+        "a b b"
+        "a d e"
+        "a d e"
+        "a d e"
+        "c d e"
+        "c d e"
+        "c d e";
+    }
+
+    .is-a,
+    .is-b,
+    .is-c,
+    .is-d,
+    .is-e {
+      aspect-ratio: auto;
+      height: 100%;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .congresos-grid {
+      gap: 1rem;
+      height: min(40rem, 52vw);
+    }
+
+    .congresos-cell {
+      border-radius: 1.5rem;
+    }
+  }
+</style>

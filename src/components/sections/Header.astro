@@ -1,0 +1,130 @@
+---
+import { hero, logos, navLinks } from "@content/content";
+import MobileNav from "@components/islands/MobileNav";
+---
+
+<header id="site-header" class="fixed inset-x-0 top-0 z-50" data-header>
+  <div
+    class="container relative z-10 flex h-14 items-center justify-between gap-4 sm:h-16 lg:h-[4.5rem]"
+  >
+    <a
+      href="#inicio"
+      class="inline-flex shrink-0 items-center"
+      aria-label="Hoyle Otorrinos — inicio"
+    >
+      <img
+        src={logos.white.src}
+        alt=""
+        class="header-logo-white h-8 w-auto max-w-[10.5rem] object-contain object-left sm:h-9 sm:max-w-[12.5rem] lg:h-10 lg:max-w-[14rem]"
+        width="220"
+        height="42"
+        aria-hidden="true"
+      />
+      <img
+        src={logos.dark.src}
+        alt={logos.dark.alt}
+        class="header-logo-dark h-8 w-auto max-w-[10.5rem] object-contain object-left sm:h-9 sm:max-w-[12.5rem] lg:h-10 lg:max-w-[14rem]"
+        width="220"
+        height="42"
+      />
+    </a>
+
+    <nav
+      class="hidden items-center gap-4 xl:gap-6 lg:flex"
+      aria-label="Principal"
+    >
+      {
+        navLinks.map((link) => (
+          <a href={link.href} class="header-nav-link text-sm font-medium transition">
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <MobileNav
+      client:load
+      links={[...navLinks]}
+      ctaHref={hero.cta.href}
+      ctaLabel={hero.cta.label}
+    />
+  </div>
+</header>
+
+<style>
+  #site-header {
+    isolation: isolate;
+    background: transparent;
+    border-bottom: 1px solid transparent;
+    transition:
+      background-color 320ms ease,
+      border-color 320ms ease,
+      backdrop-filter 320ms ease;
+  }
+
+  #site-header.is-scrolled {
+    background: rgb(13 17 70 / 0.28);
+    border-bottom-color: rgb(255 255 255 / 0.12);
+    backdrop-filter: blur(12px) saturate(1.15);
+    -webkit-backdrop-filter: blur(12px) saturate(1.15);
+  }
+
+  #site-header .header-logo-dark {
+    display: none;
+  }
+  #site-header .header-logo-white {
+    display: block;
+  }
+  #site-header .header-nav-link {
+    color: #ffffff;
+  }
+  #site-header .header-nav-link:hover {
+    color: rgb(255 255 255 / 0.72);
+  }
+
+  #site-header.is-solid {
+    background: rgb(255 255 255 / 0.97);
+    border-bottom-color: rgb(13 17 70 / 0.08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  #site-header.is-solid .header-logo-white {
+    display: none;
+  }
+  #site-header.is-solid .header-logo-dark {
+    display: block;
+  }
+  #site-header.is-solid .header-nav-link {
+    color: #0d1146;
+  }
+  #site-header.is-solid .header-nav-link:hover {
+    color: #3a5afe;
+  }
+
+  #site-header.is-nav-open {
+    border-bottom-color: transparent;
+    background: #ffffff;
+  }
+</style>
+
+<script>
+  const header = document.getElementById("site-header");
+  if (header) {
+    const threshold = () => {
+      const hero = document.getElementById("inicio");
+      return hero ? Math.max(hero.offsetHeight - 96, 80) : 120;
+    };
+
+    const update = () => {
+      const y = window.scrollY;
+      header.classList.toggle("is-scrolled", y > 16);
+      if (!header.classList.contains("is-nav-open")) {
+        header.classList.toggle("is-solid", y > threshold());
+      }
+    };
+
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+  }
+</script>

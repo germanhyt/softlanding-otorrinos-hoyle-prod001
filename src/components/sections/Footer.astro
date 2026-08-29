@@ -1,0 +1,57 @@
+---
+import { siteConfig } from "@config/site.config";
+import { footer, logos, navLinks } from "@content/content";
+
+const phone = siteConfig.phone;
+const email = siteConfig.email;
+---
+
+<footer class="bg-brand-footer text-white">
+  <div class="container py-10 md:py-12">
+    <div class="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+      <a href="#inicio" class="inline-flex shrink-0 items-center" aria-label="Hoyle Otorrinos — inicio">
+        <img
+          src={logos.white.src}
+          alt={logos.white.alt}
+          class="h-8 w-auto max-w-[12rem] object-contain object-left sm:h-9 sm:max-w-[14rem]"
+          width="220"
+          height="42"
+        />
+      </a>
+
+      <nav class="flex flex-wrap gap-x-5 gap-y-2 text-sm font-medium text-white/90" aria-label="Pie de página">
+        {
+          navLinks.map((link) => (
+            <a href={link.href} class="transition hover:text-white">
+              {link.label}
+            </a>
+          ))
+        }
+      </nav>
+    </div>
+
+    <div class="mt-8 flex flex-col gap-3 border-t border-white/15 pt-6 text-sm text-white/80 sm:flex-row sm:items-end sm:justify-between">
+      <div class="flex flex-col gap-1">
+        {
+          phone ? (
+            <a href={`tel:${phone}`} class="hover:text-white">
+              {phone}
+            </a>
+          ) : (
+            <span>{footer.phoneLabel}</span>
+          )
+        }
+        {
+          email ? (
+            <a href={`mailto:${email}`} class="hover:text-white">
+              {email}
+            </a>
+          ) : (
+            <span>{footer.emailLabel}</span>
+          )
+        }
+      </div>
+      <p>{footer.copyright}</p>
+    </div>
+  </div>
+</footer>

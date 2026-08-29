@@ -1,0 +1,67 @@
+---
+import { seoConfig } from "@config/seoConfig";
+import { siteConfig } from "@config/site.config";
+import { buildStructuredData } from "@config/structuredData";
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = seoConfig.title, description = seoConfig.description } =
+  Astro.props;
+const canonical = new URL(Astro.url.pathname, siteConfig.siteUrl).toString();
+const ogImageUrl = new URL(seoConfig.openGraph.imagePath, siteConfig.siteUrl).toString();
+const structuredData = buildStructuredData(canonical);
+const robotsContent = [
+  seoConfig.robots.index ? "index" : "noindex",
+  seoConfig.robots.follow ? "follow" : "nofollow",
+].join(", ");
+---
+
+<!doctype html>
+<html lang={siteConfig.lang}>
+  <head>
+    <script is:inline>document.documentElement.classList.add("js");</script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={seoConfig.keywords.join(", ")} />
+    <meta name="author" content={seoConfig.author} />
+    <meta name="robots" content={robotsContent} />
+    <meta name="theme-color" content={seoConfig.themeColor} />
+    <meta name="geo.region" content="PE" />
+    <link rel="canonical" href={canonical} />
+
+    {
+      seoConfig.hreflang.map(({ lang, href }) => (
+        <link rel="alternate" hreflang={lang} href={href} />
+      ))
+    }
+
+    <meta property="og:title" content={seoConfig.openGraph.title} />
+    <meta property="og:description" content={seoConfig.openGraph.description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content={seoConfig.openGraph.type} />
+    <meta property="og:locale" content={seoConfig.openGraph.locale} />
+    <meta property="og:site_name" content={seoConfig.openGraph.siteName} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:alt" content={seoConfig.openGraph.imageAlt} />
+
+    <meta name="twitter:card" content={seoConfig.twitter.card} />
+    <meta name="twitter:title" content={seoConfig.twitter.title} />
+    <meta name="twitter:description" content={seoConfig.twitter.description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+  </head>
+  <body class="flex min-h-screen flex-col">
+    <slot />
+  </body>
+</html>

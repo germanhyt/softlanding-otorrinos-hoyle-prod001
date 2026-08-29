@@ -1,0 +1,31 @@
+---
+import { articulos } from "@content/content";
+import MotionReveal from "@components/islands/MotionReveal";
+import ArticlesCarousel from "@components/islands/ArticlesCarousel";
+---
+
+<section
+  id={articulos.id}
+  class="articulos bg-brand-neutral-mist py-10 md:py-12 lg:py-14"
+  aria-labelledby="articulos-heading"
+>
+  <div class="container">
+    <MotionReveal client:visible variant="up" className="mx-auto max-w-3xl text-center">
+      <h2
+        id="articulos-heading"
+        class="text-[1.65rem] font-bold leading-[1.2] tracking-tight text-brand-navy xs:text-[1.85rem] sm:text-[2.05rem] md:text-[2.25rem] lg:text-[2.5rem]"
+      >
+        {articulos.headline}
+      </h2>
+    </MotionReveal>
+
+    <div class="mt-8 sm:mt-10">
+      <ArticlesCarousel
+        client:visible
+        items={articulos.items}
+        moreLabel={articulos.moreLabel}
+        closeLabel={articulos.closeLabel}
+      />
+    </div>
+  </div>
+</section>

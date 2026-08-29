@@ -30,8 +30,8 @@ import MotionScope from "@components/islands/MotionScope";
       <MotionScope
         client:load
         trigger="mount"
-        variant="left"
-        staggerDelay={0.1}
+        variant="up"
+        staggerDelay={0.16}
         className="max-w-[20rem] text-white xs:max-w-[22rem] sm:max-w-md md:max-w-[34rem] lg:max-w-[38rem]"
       >
         <h1 id="hero-heading" class="sr-only">{hero.title}</h1>
@@ -62,6 +62,24 @@ import MotionScope from "@components/islands/MotionScope";
     inset: 0;
     z-index: 0;
     overflow: hidden;
+    animation: hero-media-in 1.25s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @keyframes hero-media-in {
+    from {
+      opacity: 0.35;
+      transform: scale(1.07);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-media {
+      animation: none;
+    }
   }
 
   .hero-media__picture {

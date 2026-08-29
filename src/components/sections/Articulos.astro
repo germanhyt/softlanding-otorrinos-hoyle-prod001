@@ -19,13 +19,13 @@ import ArticlesCarousel from "@components/islands/ArticlesCarousel";
       </h2>
     </MotionReveal>
 
-    <div class="mt-8 sm:mt-10">
+    <MotionReveal client:visible variant="up" delay={0.1} className="mt-8 sm:mt-10">
       <ArticlesCarousel
         client:visible
         items={articulos.items}
         moreLabel={articulos.moreLabel}
         closeLabel={articulos.closeLabel}
       />
-    </div>
+    </MotionReveal>
   </div>
 </section>

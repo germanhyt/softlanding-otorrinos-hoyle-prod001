@@ -66,12 +66,12 @@ export default function HeroStats({ stats }: Props) {
           {stats.map((item, index) => (
             <motion.article
               key={item.label}
-              initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+              initial={reduceMotion ? false : { opacity: 0, y: 28 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{
-                duration: 0.75,
+                duration: 0.8,
                 ease: easeOutSoft,
-                delay: reduceMotion ? 0 : 0.12 + index * 0.08,
+                delay: reduceMotion ? 0 : 0.28 + index * 0.1,
               }}
               className="hero-stat-card flex min-h-[6.5rem] flex-col items-center justify-center rounded-2xl px-3 py-4 text-center text-brand-navy sm:min-h-[7.25rem] sm:px-4 sm:py-5 lg:min-h-[8rem]"
             >

@@ -26,7 +26,7 @@ import MotionReveal from "@components/islands/MotionReveal";
     <div class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:mt-10 lg:grid-cols-3 lg:gap-6">
       {
         servicios.cards.map((card, index) => (
-          <MotionReveal client:visible variant="up" delay={index * 0.06}>
+          <MotionReveal client:visible variant="up" delay={0.04 + index * 0.09}>
             <article class="servicios-card relative isolate min-h-[11.5rem] overflow-hidden rounded-[1.25rem] bg-white px-6 py-6 sm:min-h-[12.5rem] sm:px-7 sm:py-7 lg:min-h-[13.5rem]">
               <h3 class="relative z-10 max-w-[12rem] text-xl font-bold tracking-tight text-brand-navy sm:text-[1.35rem]">
                 {card.title}

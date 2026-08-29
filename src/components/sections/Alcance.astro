@@ -24,7 +24,7 @@ import ProceduresTabs from "@components/islands/ProceduresTabs";
       </p>
     </MotionReveal>
 
-    <MotionReveal client:visible variant="up" delay={0.08} className="mt-8 sm:mt-10">
+    <MotionReveal client:visible variant="scale" delay={0.1} className="mt-8 sm:mt-10">
       <ProceduresTabs
         client:visible
         tabs={alcance.tabs}
@@ -32,7 +32,7 @@ import ProceduresTabs from "@components/islands/ProceduresTabs";
       />
     </MotionReveal>
 
-    <MotionReveal client:visible variant="up" delay={0.12} className="mt-8 text-center sm:mt-10">
+    <MotionReveal client:visible variant="up" delay={0.18} className="mt-8 text-center sm:mt-10">
       <a
         href={alcance.cta.href}
         class="inline-flex items-center rounded-full bg-brand-blue px-8 py-3 text-[0.95rem] font-bold text-white transition hover:bg-brand-blue-hover sm:px-9 sm:py-3.5"

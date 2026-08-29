@@ -13,63 +13,65 @@ export const springSoft: Transition = {
 };
 
 const enter = {
-  duration: 0.9,
+  duration: 0.72,
   ease: easeOutSoft,
 } as const;
 
 export const motionTravel = {
-  y: 12,
-  x: 10,
+  y: 28,
+  x: 22,
 } as const;
 
 export const fadeUp: Variants = {
   hidden: { opacity: 0, y: motionTravel.y },
-  visible: {
+  visible: (delay = 0) => ({
     opacity: 1,
     y: 0,
-    transition: enter,
-  },
+    transition: { ...enter, delay },
+  }),
 };
 
 export const fadeLeft: Variants = {
   hidden: { opacity: 0, x: -motionTravel.x },
-  visible: {
+  visible: (delay = 0) => ({
     opacity: 1,
     x: 0,
-    transition: enter,
-  },
+    transition: { ...enter, delay },
+  }),
 };
 
 export const fadeRight: Variants = {
   hidden: { opacity: 0, x: motionTravel.x },
-  visible: {
+  visible: (delay = 0) => ({
     opacity: 1,
     x: 0,
-    transition: enter,
-  },
+    transition: { ...enter, delay },
+  }),
 };
 
 export const fadeIn: Variants = {
   hidden: { opacity: 0 },
-  visible: {
+  visible: (delay = 0) => ({
     opacity: 1,
-    transition: { duration: 0.75, ease: easeOutSoft },
-  },
+    transition: { duration: 0.6, ease: easeOutSoft, delay },
+  }),
 };
 
 export const scaleIn: Variants = {
-  hidden: { opacity: 0, scale: 0.985 },
-  visible: {
+  hidden: { opacity: 0, y: 18, scale: 0.96 },
+  visible: (delay = 0) => ({
     opacity: 1,
+    y: 0,
     scale: 1,
-    transition: { duration: 0.9, ease: easeOutSoft },
-  },
+    transition: { duration: 0.82, ease: easeOutSoft, delay },
+  }),
 };
 
+/** Fire as the block approaches, not after it has already landed. */
 export const viewportScroll = {
   once: true,
-  amount: 0.2,
-  margin: "0px 0px -12% 0px",
+  amount: 0.18,
+  margin: "0px 0px 12% 0px",
 } as const;
 
 export type MotionVariantName = "up" | "left" | "right" | "fade" | "scale";
@@ -98,7 +100,7 @@ export function hiddenStyleForVariant(
         transform: `translate3d(${motionTravel.x}px, 0, 0)`,
       };
     case "scale":
-      return { opacity: "0", transform: "scale(0.985)" };
+      return { opacity: "0", transform: "translate3d(0, 18px, 0) scale(0.96)" };
     case "fade":
       return { opacity: "0", transform: "none" };
     default:
@@ -107,12 +109,12 @@ export function hiddenStyleForVariant(
 }
 
 export const itemEntrance = {
-  duration: 0.82,
+  duration: 0.68,
   ease: easeOutSoft,
 } as const;
 
 export const itemInViewOptions = {
   once: true,
-  amount: 0.18,
-  margin: "0px 0px -10% 0px",
+  amount: 0.16,
+  margin: "0px 0px 10% 0px",
 } as const;

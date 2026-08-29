@@ -36,11 +36,11 @@ export default function MotionReveal({
   if (trigger === "mount") {
     return (
       <motion.div
-        className={classes}
+        className={`${classes} is-revealed`}
         variants={variants}
         initial="hidden"
         animate="visible"
-        transition={{ delay }}
+        custom={delay}
       >
         {children}
       </motion.div>
@@ -49,12 +49,12 @@ export default function MotionReveal({
 
   return (
     <motion.div
-      className={classes}
+      className={`${classes} is-revealed`}
       variants={variants}
       initial="hidden"
       whileInView="visible"
       viewport={viewportScroll}
-      transition={{ delay }}
+      custom={delay}
     >
       {children}
     </motion.div>

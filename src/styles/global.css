@@ -301,12 +301,12 @@ html.js .hero-stats:not(.is-revealed) {
 }
 
 .articulos-swiper .swiper-pagination-bullet {
-  background: #0d1146;
+  background: #111111;
   opacity: 0.28;
 }
 
 .articulos-swiper .swiper-pagination-bullet-active {
-  background: #3a5afe;
+  background: #111111;
   opacity: 1;
 }
 

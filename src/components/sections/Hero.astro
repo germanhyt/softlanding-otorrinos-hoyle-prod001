@@ -32,12 +32,18 @@ import MotionScope from "@components/islands/MotionScope";
         trigger="mount"
         variant="up"
         staggerDelay={0.16}
-        className="max-w-[20rem] text-white xs:max-w-[22rem] sm:max-w-md md:max-w-[34rem] lg:max-w-[38rem]"
+        className="max-w-[20rem] text-white xs:max-w-[22rem] sm:max-w-md md:max-w-[36rem] lg:max-w-[42rem]"
       >
-        <h1 id="hero-heading" class="sr-only">{hero.title}</h1>
+        <h1
+          id="hero-heading"
+          data-motion-item
+          class="text-[1.7rem] font-bold leading-[1.12] tracking-tight text-white xs:text-[1.9rem] sm:text-[2.2rem] md:text-[2.55rem] lg:text-[2.85rem]"
+        >
+          {hero.headline}
+        </h1>
         <p
           data-motion-item
-          class="text-[1.05rem] font-medium leading-[1.55] text-white xs:text-[1.15rem] sm:text-[1.25rem] md:text-[1.4rem] md:leading-[1.5] lg:text-[1.55rem]"
+          class="mt-4 text-[1.05rem] font-medium leading-[1.55] text-white/92 xs:text-[1.15rem] sm:mt-5 sm:text-[1.25rem] md:text-[1.35rem] md:leading-[1.5] lg:text-[1.45rem]"
         >
           {hero.body}
         </p>

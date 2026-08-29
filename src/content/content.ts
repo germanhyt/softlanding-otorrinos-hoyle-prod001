@@ -23,6 +23,7 @@ export const logos = {
 export const hero = {
   id: "inicio",
   title: "Hoyle Otorrinolaringólogos",
+  headline: "Cuidamos tu salud respiratoria, auditiva y de garganta",
   body: "En Hoyle Otorrinolaringólogos combinamos experiencia clínica, tecnología y un trato cercano para ofrecer diagnósticos precisos y tratamientos personalizados para niños y adultos.",
   cta: { label: "Agenda tu cita", href: siteConfig.ctaHref },
   image: {

@@ -17,7 +17,7 @@ type Props = {
 };
 
 const fieldClass =
-  "w-full rounded-xl border border-brand-navy/20 bg-white px-4 py-3 text-sm text-brand-navy placeholder:text-text-muted/70 transition focus:border-brand-blue focus:outline-none sm:px-5 sm:py-3.5 sm:text-[0.95rem]";
+  "w-full rounded-2xl border border-[#D9D6E3] bg-white px-4 py-3.5 text-sm text-brand-navy placeholder:text-[#8B8AA0] transition focus:border-[#7C63C9] focus:outline-none sm:px-5 sm:text-[0.95rem]";
 
 export default function ContactForm({
   whatsapp,
@@ -40,7 +40,7 @@ export default function ContactForm({
         icon: "warning",
         title: validationTitle,
         text: validationBody,
-        confirmButtonColor: "#3A5AFE",
+        confirmButtonColor: "#7C63C9",
       });
       return;
     }
@@ -117,14 +117,12 @@ export default function ContactForm({
         required
       />
 
-      <div className="flex justify-end pt-1">
-        <button
-          type="submit"
-          className="inline-flex items-center rounded-full bg-brand-blue px-8 py-3 text-[0.95rem] font-bold text-white transition hover:bg-brand-blue-hover"
-        >
-          {submitLabel}
-        </button>
-      </div>
+      <button
+        type="submit"
+        className="mt-1 inline-flex w-full items-center justify-center rounded-full bg-[#7C63C9] px-8 py-3.5 text-[0.95rem] font-semibold text-white transition hover:bg-[#6d54b8]"
+      >
+        {submitLabel}
+      </button>
     </form>
   );
 }

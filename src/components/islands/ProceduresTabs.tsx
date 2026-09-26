@@ -53,7 +53,7 @@ export default function ProceduresTabs({ tabs, proceduresLabel }: Props) {
         id={`alcance-panel-${active.id}`}
         role="tabpanel"
         aria-labelledby={`alcance-tab-${active.id}`}
-        className="alcance-card mt-8 overflow-hidden rounded-[1.5rem] bg-white sm:mt-10 sm:rounded-[1.75rem] lg:rounded-[2rem]"
+        className="alcance-card mx-auto mt-8 w-full max-w-[68rem] overflow-hidden rounded-[1.5rem] bg-white sm:mt-10 sm:rounded-[1.75rem] lg:rounded-[2rem]"
       >
         <div className="grid md:grid-cols-2">
           <div className="alcance-photo relative min-h-[14rem] overflow-hidden sm:min-h-[16rem] md:min-h-[22rem]">

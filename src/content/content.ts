@@ -5,8 +5,9 @@ export const navLinks = [
   { label: "Nosotros", href: "#nosotros" },
   { label: "Servicios", href: "#servicios" },
   { label: "Atención especializada", href: "#atencion" },
+  { label: "Septorrinoplastia", href: "#septorrinoplastia" },
   { label: "Contáctanos", href: "#contacto" },
-  { label: "Preguntas frecuentes", href: "#faq" },
+  { label: "Resolvemos tus dudas", href: "#faq" },
 ] as const;
 
 export const logos = {
@@ -24,7 +25,7 @@ export const hero = {
   id: "inicio",
   title: "Hoyle Otorrinolaringólogos",
   headline: "Cuidamos tu salud respiratoria, auditiva y de garganta",
-  body: "En Hoyle Otorrinolaringólogos combinamos experiencia clínica, tecnología y un trato cercano para ofrecer diagnósticos precisos y tratamientos personalizados para niños y adultos.",
+  body: "En Hoyle Otorrinos combinamos experiencia clínica, tecnología y un trato cercano para ofrecer diagnósticos precisos y tratamientos personalizados para niños y adultos.",
   cta: { label: "Agenda tu cita", href: siteConfig.ctaHref },
   image: {
     src: "/assets/hero/hero--desktop.webp",
@@ -35,8 +36,8 @@ export const hero = {
     alt: "Médico otorrinolaringólogo de Hoyle Otorrinos evaluando a una paciente",
   },
   stats: [
-    { value: "20+", label: "Años de experiencia" },
-    { value: "5000+", label: "Pacientes atendidos" },
+    { value: "+60", label: "Años de experiencia" },
+    { value: "+20000", label: "Pacientes atendidos" },
     { value: "", label: "Especialistas certificados" },
     { value: "100%", label: "Compromiso con el paciente" },
   ],
@@ -167,38 +168,74 @@ export const alcance = {
   ],
 } as const;
 
+export const septorrinoplastia = {
+  id: "septorrinoplastia",
+  image: {
+    src: "/assets/sections/4_1/septorrinoplastia.png",
+    alt: "Procedimiento nasal en consultorio de Hoyle Otorrinos",
+  },
+  pair: {
+    left: {
+      title: "Función",
+      body: "Respiración y estructura nasal",
+    },
+    right: {
+      title: "Armonía",
+      body: "Equilibrio y proporción facial",
+    },
+  },
+  detail: {
+    title: "Septorrinoplastia",
+    body: "Un enfoque que integra función respiratoria y armonía facial, evaluando cada caso de forma individual para definir el procedimiento más adecuado.",
+    cta: { label: "Agendar evaluación", href: siteConfig.ctaHref },
+  },
+} as const;
+
 export const tecnologia = {
   id: "tecnologia",
-  headline: "Tecnología para un diagnóstico más preciso.",
+  headline: "Tecnología para un diagnóstico más preciso",
   body: "Contamos con equipos especializados que permiten realizar evaluaciones completas y ofrecer tratamientos seguros y oportunos.",
   image: {
-    src: "/assets/sections/5/tecnologia.png",
-    alt: "Equipo quirúrgico de Hoyle Otorrinos en un procedimiento en quirófano",
+    src: "/assets/sections/6/equipos.png",
+    alt: "Cirujanos de Hoyle Otorrinos realizando una endoscopía en quirófano",
   },
+  caption: "Equipos especializados en cada etapa del diagnóstico",
 } as const;
 
 export const equipos = {
   headline: "Equipos",
-  image: {
-    src: "/assets/sections/6/equipos.png",
-    alt: "Médicos de Hoyle Otorrinos realizando una endoscopía nasal con monitor de alta definición",
-  },
   items: [
     {
       title: "Endoscopía Nasal",
       body: "Evaluación detallada de las fosas nasales y senos paranasales con imagen de alta definición.",
+      image: {
+        src: "/assets/sections/6/endoscopia-nasal.png",
+        alt: "Endoscopía nasal en consultorio",
+      },
     },
     {
       title: "Audiometría Digital",
       body: "Evaluación precisa de la capacidad auditiva mediante tecnología digital avanzada.",
+      image: {
+        src: "/assets/sections/6/endiometria-digital.png",
+        alt: "Audiometría digital con paciente",
+      },
     },
     {
       title: "Videolaringoscopía",
       body: "Visualización directa de la laringe y cuerdas vocales para diagnóstico preciso.",
+      image: {
+        src: "/assets/sections/6/videolaringoscopia.png",
+        alt: "Videolaringoscopía en consulta",
+      },
     },
     {
       title: "Microscopía de Oído",
       body: "Limpieza y evaluación microscópica del conducto auditivo y tímpano.",
+      image: {
+        src: "/assets/sections/6/microscopia-oido.png",
+        alt: "Microscopía de oído en consultorio",
+      },
     },
   ],
 } as const;
@@ -232,29 +269,38 @@ export const congresos = {
     {
       src: "/assets/sections/8/congreso-1.webp",
       alt: "Participación en el Congreso Panamericano de Otorrinolaringología",
+      caption: "Participación en el Congreso Panamericano de Otorrinolaringología.",
       area: "a",
     },
     {
       src: "/assets/sections/8/congreso-3.webp",
       alt: "Participación en el Congreso Nacional SEORL-CCC",
+      caption: "Participación en el 76 Congreso Nacional SEORL – CCC.",
       area: "b",
     },
     {
       src: "/assets/sections/8/congreso-2.webp",
       alt: "Participación en la reunión otológica #OTOMTG24",
+      caption: "Participación en la reunión otológica #OTOMTG24.",
       area: "c",
     },
     {
       src: "/assets/sections/8/congreso-4.webp",
       alt: "Participación en curso internacional de rinoplastia",
+      caption: "Participación en curso internacional de rinoplastia.",
       area: "d",
     },
     {
       src: "/assets/sections/8/congreso-5.webp",
       alt: "Participación en el Annual Meeting AAO-HNSF",
+      caption: "Participación en el Annual Meeting AAO-HNSF.",
       area: "e",
     },
   ],
+  experience: {
+    title: "Experiencia que se sigue construyendo",
+    body: "Una trayectoria acompañada de actualización constante, formación especializada y aprendizaje en escenarios nacionales e internacionales.",
+  },
 } as const;
 
 export const contacto = {
@@ -608,11 +654,11 @@ export const articulos = {
 
 export const faq = {
   id: "faq",
-  headline: "Preguntas frecuentes",
+  headline: "Resolvemos tus dudas",
   items: [
     {
       id: "cuando-consultar",
-      question: "¿Cuándo debería consultar con un otorrinolaringólogo?",
+      question: "¿Cuándo debería consultar con un Otorrino?",
       answer:
         "Si presentas síntomas persistentes como congestión nasal, pérdida de audición, dolor de oído, ronquera, vértigo o ronquidos frecuentes.",
     },
@@ -644,6 +690,11 @@ export const faq = {
 } as const;
 
 export const footer = {
+  tagline:
+    "Otorrinolaringólogos para niños y adultos. Diagnóstico preciso y trato cercano en cada consulta.",
+  exploreTitle: "Explora",
+  contactTitle: "Contacto",
+  explore: navLinks,
   phoneLabel: "Número de teléfono",
   emailLabel: "Correo electrónico",
   copyright: "© 2026 · Hoyleotorrinos.pe",

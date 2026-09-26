@@ -8,37 +8,39 @@ import MotionReveal from "@components/islands/MotionReveal";
   class="tecnologia bg-brand-neutral-mist pt-10 md:pt-12 lg:pt-14"
   aria-labelledby="tecnologia-heading"
 >
-  <div class="container grid items-center gap-10 pb-6 md:grid-cols-2 md:gap-12 md:pb-8 lg:gap-16">
-    <MotionReveal client:visible variant="left" className="max-w-xl">
+  <div class="container">
+    <MotionReveal client:visible variant="up" className="max-w-3xl">
       <h2
         id="tecnologia-heading"
-        class="text-[1.65rem] font-bold leading-[1.2] tracking-tight text-brand-navy xs:text-[1.85rem] sm:text-[2.05rem] md:text-[2.2rem] lg:text-[2.45rem]"
+        class="max-w-[20rem] font-serif text-[1.85rem] font-semibold leading-[1.15] text-[#211E46] sm:max-w-2xl sm:text-[2.35rem] md:text-[2.75rem] md:leading-[1.12] lg:text-[3rem]"
       >
         {tecnologia.headline}
       </h2>
-      <p class="mt-6 text-[0.95rem] leading-[1.65] text-text-soft sm:text-base md:mt-8 md:text-[1.05rem] md:leading-[1.7]">
+      <p class="mt-4 max-w-xl font-dm text-[0.95rem] leading-[1.5] text-[#3d4268] sm:text-base">
         {tecnologia.body}
       </p>
     </MotionReveal>
 
-    <MotionReveal client:visible variant="scale" delay={0.1}>
-      <div class="tecnologia-photo overflow-hidden rounded-[1.35rem] sm:rounded-[1.6rem]">
+    <MotionReveal client:visible variant="scale" delay={0.08} className="mt-8 sm:mt-10">
+      <figure class="tecnologia-photo relative overflow-hidden rounded-[1.25rem] sm:rounded-[1.5rem]">
         <img
           src={tecnologia.image.src}
           alt={tecnologia.image.alt}
-          class="aspect-[16/10] h-full w-full object-cover md:aspect-auto md:min-h-[20rem] lg:min-h-[24rem]"
-          width="960"
-          height="640"
+          class="aspect-[16/9] w-full object-cover sm:aspect-[16/8]"
+          width="1440"
+          height="720"
           loading="lazy"
           decoding="async"
         />
-      </div>
+        <div
+          class="absolute inset-0 bg-[linear-gradient(180deg,transparent_42%,rgba(18,28,72,0.28)_68%,rgba(16,24,64,0.72)_100%)]"
+          aria-hidden="true"
+        >
+        </div>
+        <figcaption class="absolute inset-x-0 bottom-0 px-6 pb-6 text-center font-dm text-base font-medium text-white sm:pb-8 sm:text-lg md:text-xl">
+          {tecnologia.caption}
+        </figcaption>
+      </figure>
     </MotionReveal>
   </div>
 </section>
-
-<style>
-  .tecnologia-photo {
-    box-shadow: 0 18px 40px rgb(13 17 70 / 0.12);
-  }
-</style>

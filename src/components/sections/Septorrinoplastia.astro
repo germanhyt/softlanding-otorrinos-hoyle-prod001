@@ -1,0 +1,28 @@
+---
+import { septorrinoplastia } from "@content/content";
+import SeptorrinoplastiaPin from "@components/islands/SeptorrinoplastiaPin";
+---
+
+<section id={septorrinoplastia.id} class="septorrinoplastia" aria-label={septorrinoplastia.detail.title}>
+  <SeptorrinoplastiaPin
+    client:load
+    image={septorrinoplastia.image}
+    pair={septorrinoplastia.pair}
+    detail={septorrinoplastia.detail}
+  />
+</section>
+
+<style>
+  @media (prefers-reduced-motion: reduce) {
+    .septorrinoplastia :global([data-detail]) {
+      position: relative;
+      inset: auto;
+      padding-bottom: 4rem;
+    }
+
+    .septorrinoplastia :global(.h-\[100svh\]) {
+      height: auto;
+      min-height: 100svh;
+    }
+  }
+</style>

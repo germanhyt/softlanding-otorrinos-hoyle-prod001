@@ -30,12 +30,12 @@ import MobileNav from "@components/islands/MobileNav";
     </a>
 
     <nav
-      class="hidden items-center gap-4 xl:gap-6 lg:flex"
+      class="hidden items-center gap-3 xl:gap-5 2xl:gap-6 lg:flex"
       aria-label="Principal"
     >
       {
         navLinks.map((link) => (
-          <a href={link.href} class="header-nav-link text-sm font-medium transition">
+          <a href={link.href} class="header-nav-link whitespace-nowrap text-[0.8rem] font-medium transition xl:text-sm">
             {link.label}
           </a>
         ))
@@ -54,8 +54,15 @@ import MobileNav from "@components/islands/MobileNav";
 <style>
   #site-header {
     isolation: isolate;
-    background: transparent;
-    border-bottom: 1px solid transparent;
+    background: linear-gradient(
+      180deg,
+      rgb(13 17 70 / 0.62) 0%,
+      rgb(13 17 70 / 0.4) 68%,
+      rgb(13 17 70 / 0.16) 100%
+    );
+    border-bottom: 0;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     transition:
       background-color 320ms ease,
       border-color 320ms ease,
@@ -63,10 +70,12 @@ import MobileNav from "@components/islands/MobileNav";
   }
 
   #site-header.is-scrolled {
-    background: rgb(13 17 70 / 0.28);
-    border-bottom-color: rgb(255 255 255 / 0.12);
-    backdrop-filter: blur(12px) saturate(1.15);
-    -webkit-backdrop-filter: blur(12px) saturate(1.15);
+    background: linear-gradient(
+      180deg,
+      rgb(13 17 70 / 0.7) 0%,
+      rgb(13 17 70 / 0.42) 100%
+    );
+    border-bottom: 0;
   }
 
   #site-header .header-logo-dark {
@@ -110,17 +119,8 @@ import MobileNav from "@components/islands/MobileNav";
 <script>
   const header = document.getElementById("site-header");
   if (header) {
-    const threshold = () => {
-      const hero = document.getElementById("inicio");
-      return hero ? Math.max(hero.offsetHeight - 96, 80) : 120;
-    };
-
     const update = () => {
-      const y = window.scrollY;
-      header.classList.toggle("is-scrolled", y > 16);
-      if (!header.classList.contains("is-nav-open")) {
-        header.classList.toggle("is-solid", y > threshold());
-      }
+      header.classList.toggle("is-scrolled", window.scrollY > 16);
     };
 
     update();

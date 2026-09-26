@@ -5,47 +5,45 @@ import MotionReveal from "@components/islands/MotionReveal";
 
 <section
   id={servicios.id}
-  class="servicios bg-brand-lavender py-10 md:py-12 lg:py-14"
+  class="servicios overflow-hidden bg-brand-navy py-12 md:py-14 lg:py-16"
   aria-labelledby="servicios-heading"
 >
   <div class="container">
-    <MotionReveal client:visible variant="up" className="mx-auto max-w-3xl text-center">
-      <h2
-        id="servicios-heading"
-        class="text-[1.65rem] font-bold leading-[1.2] tracking-tight text-brand-navy xs:text-[1.85rem] sm:text-[2.05rem] md:text-[2.25rem] lg:text-[2.5rem]"
-      >
-        {servicios.headline}
-      </h2>
-      <p
-        class="mx-auto mt-4 max-w-2xl text-[0.95rem] leading-[1.65] text-text-muted sm:text-base md:mt-5 md:text-[1.05rem]"
-      >
-        {servicios.intro}
-      </p>
+    <MotionReveal client:visible variant="up">
+      <div class="grid items-end gap-5 md:grid-cols-[minmax(0,1.05fr)_minmax(0,0.9fr)] md:gap-10 lg:gap-16">
+        <h2
+          id="servicios-heading"
+          class="max-w-[26rem] font-serif text-[1.85rem] font-semibold leading-[1.15] text-white sm:max-w-[32rem] sm:text-[2.35rem] md:max-w-[36rem] md:text-[2.6rem] md:leading-[55px] lg:text-[3rem]"
+        >
+          {servicios.headline}
+        </h2>
+        <p class="max-w-[34rem] font-dm text-[0.95rem] font-normal leading-[1.45] text-white md:text-[18px] md:leading-[25px]">
+          {servicios.intro}
+        </p>
+      </div>
     </MotionReveal>
 
-    <div class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:mt-10 lg:grid-cols-3 lg:gap-6">
+    <div class="servicios-track mt-8 flex gap-4 sm:mt-10 sm:gap-5 lg:mt-12">
       {
-        servicios.cards.map((card, index) => (
-          <MotionReveal client:visible variant="up" delay={0.04 + index * 0.09}>
-            <article class="servicios-card relative isolate min-h-[11.5rem] overflow-hidden rounded-[1.25rem] bg-white px-6 py-6 sm:min-h-[12.5rem] sm:px-7 sm:py-7 lg:min-h-[13.5rem]">
-              <h3 class="servicios-card__copy relative z-10 text-xl font-bold tracking-tight text-brand-navy sm:text-[1.35rem]">
-                {card.title}
-              </h3>
-              <p class="servicios-card__copy relative z-10 mt-3 text-sm leading-[1.55] text-text-muted sm:text-[0.95rem]">
-                {card.body}
-              </p>
-              <img
-                src={card.icon}
-                alt=""
-                class="servicios-card__icon pointer-events-none absolute bottom-0 right-0 h-[7.5rem] w-[7.5rem] object-contain sm:h-[8.25rem] sm:w-[8.25rem]"
-                width="160"
-                height="160"
-                loading="lazy"
-                decoding="async"
-                aria-hidden="true"
-              />
-            </article>
-          </MotionReveal>
+        servicios.cards.map((card) => (
+          <article class="servicios-card relative isolate min-h-[12.5rem] shrink-0 overflow-hidden rounded-[1.25rem] bg-white px-6 py-6 sm:min-h-[13.5rem] sm:px-7 sm:py-7">
+            <h3 class="servicios-card__copy relative z-10 font-dm text-xl font-bold tracking-tight text-brand-navy sm:text-[1.35rem]">
+              {card.title}
+            </h3>
+            <p class="servicios-card__copy relative z-10 mt-3 font-dm text-base leading-[1.5] text-[#3d4268] sm:text-[1.05rem]">
+              {card.body}
+            </p>
+            <img
+              src={card.icon}
+              alt=""
+              class="servicios-card__icon pointer-events-none absolute bottom-0 right-0 h-[7.25rem] w-[7.25rem] object-contain sm:h-[8rem] sm:w-[8rem]"
+              width="160"
+              height="160"
+              loading="lazy"
+              decoding="async"
+              aria-hidden="true"
+            />
+          </article>
         ))
       }
     </div>
@@ -53,15 +51,40 @@ import MotionReveal from "@components/islands/MotionReveal";
 </section>
 
 <style>
+  .servicios-track {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    padding-bottom: 0.25rem;
+  }
+
+  .servicios-track::-webkit-scrollbar {
+    display: none;
+  }
+
   .servicios-card {
-    box-shadow: 0 10px 28px rgb(13 17 70 / 0.06);
+    flex-basis: 86%;
+    scroll-snap-align: start;
+    box-shadow: 0 10px 28px rgb(0 0 0 / 0.12);
+  }
+
+  @media (min-width: 640px) {
+    .servicios-card {
+      flex-basis: 48%;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .servicios-card {
+      flex-basis: calc((100% - 2.5rem) / 3.2);
+    }
   }
 
   .servicios-card__copy {
-    max-width: calc(100% - 5.75rem);
+    max-width: calc(100% - 4.5rem);
   }
 
   .servicios-card__icon {
-    transform: translate(28%, 22%);
+    transform: translate(18%, 16%);
   }
 </style>

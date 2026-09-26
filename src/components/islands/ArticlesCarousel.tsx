@@ -41,7 +41,7 @@ export default function ArticlesCarousel({ items, moreLabel, closeLabel }: Props
                 loading="lazy"
                 decoding="async"
               />
-              <h3 className="mt-5 text-[1.05rem] font-bold leading-snug tracking-tight text-brand-navy sm:text-lg">
+              <h3 className="mt-5 min-h-[3lh] text-[1.05rem] font-bold leading-snug tracking-tight text-brand-navy sm:text-lg">
                 {item.title}
               </h3>
               <p className="mt-3 flex-1 text-sm leading-[1.6] text-text-muted">

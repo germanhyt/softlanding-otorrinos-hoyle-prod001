@@ -11,16 +11,16 @@ import MotionReveal from "@components/islands/MotionReveal";
   <div
     class="container grid items-center gap-10 pb-10 md:grid-cols-2 md:gap-12 md:pb-12 lg:gap-16 lg:pb-14 xl:gap-20"
   >
-    <MotionReveal client:visible variant="left" className="max-w-xl">
+    <MotionReveal client:visible variant="left" className="max-w-[36rem]">
       <h2
         id="nosotros-heading"
-        class="text-[1.65rem] font-bold leading-[1.2] tracking-tight text-brand-navy xs:text-[1.85rem] sm:text-[2.05rem] md:text-[2.2rem] lg:text-[2.45rem]"
+        class="max-w-[589px] font-serif text-[1.85rem] font-semibold leading-[1.2] text-[#211E46] sm:text-[2.35rem] md:text-[3rem] md:leading-[60px]"
       >
         {nosotros.headline}
       </h2>
       {
         nosotros.paragraphs.map((paragraph) => (
-          <p class="mt-5 text-[0.95rem] leading-[1.65] text-text-soft sm:text-base md:mt-6 md:text-[1.05rem] md:leading-[1.7]">
+          <p class="mt-5 max-w-[36rem] font-dm text-[0.95rem] font-normal leading-[1.45] text-[#050139] sm:text-base md:mt-6 md:text-[18px] md:leading-[25px]">
             {paragraph}
           </p>
         ))
@@ -28,11 +28,11 @@ import MotionReveal from "@components/islands/MotionReveal";
     </MotionReveal>
 
     <MotionReveal client:visible variant="scale" delay={0.1}>
-      <div class="nosotros-photo overflow-hidden rounded-[1.35rem] sm:rounded-[1.6rem]">
+      <div class="nosotros-photo overflow-hidden rounded-[1.25rem]">
         <img
           src={nosotros.image.src}
           alt={nosotros.image.alt}
-          class="aspect-[16/10] h-full w-full object-cover object-[50%_30%] md:aspect-auto md:min-h-[22rem] lg:min-h-[26rem]"
+          class="aspect-[16/11] h-full w-full object-cover object-center md:aspect-auto md:min-h-[20rem] lg:min-h-[24rem]"
           width="1424"
           height="811"
           loading="lazy"

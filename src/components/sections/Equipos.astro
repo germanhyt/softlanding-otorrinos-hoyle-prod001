@@ -3,33 +3,30 @@ import { equipos } from "@content/content";
 import MotionReveal from "@components/islands/MotionReveal";
 ---
 
-<section class="equipos bg-brand-neutral-mist pb-10 md:pb-12 lg:pb-14" aria-label={equipos.headline}>
-  <div class="container grid items-center gap-8 md:grid-cols-2 md:gap-12 lg:gap-16">
-    <MotionReveal client:visible variant="scale">
-      <div class="equipos-photo overflow-hidden rounded-[1.35rem] sm:rounded-[1.6rem]">
-        <img
-          src={equipos.image.src}
-          alt={equipos.image.alt}
-          class="aspect-[16/10] h-full w-full object-cover md:aspect-auto md:min-h-[26rem] lg:min-h-[30rem]"
-          width="960"
-          height="720"
-          loading="lazy"
-          decoding="async"
-        />
-      </div>
-    </MotionReveal>
-
-    <div class="flex flex-col gap-3 sm:gap-4">
+<section class="equipos bg-brand-neutral-mist pb-10 pt-5 md:pb-12 md:pt-6 lg:pb-14" aria-label={equipos.headline}>
+  <div class="container">
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
       {
         equipos.items.map((item, index) => (
-          <MotionReveal client:visible variant="right" delay={0.06 + index * 0.08}>
-            <article class="rounded-[1.1rem] bg-brand-lavender px-5 py-4 sm:rounded-[1.25rem] sm:px-6 sm:py-5">
-              <h3 class="text-lg font-bold tracking-tight text-brand-navy sm:text-xl">
-                {item.title}
-              </h3>
-              <p class="mt-1.5 text-sm leading-[1.55] text-text-soft sm:text-[0.95rem]">
-                {item.body}
-              </p>
+          <MotionReveal client:visible variant="up" delay={0.04 + index * 0.08}>
+            <article class="equipo-card relative isolate min-h-[18rem] overflow-hidden rounded-[1.15rem] sm:min-h-[20rem]">
+              <img
+                src={item.image.src}
+                alt={item.image.alt}
+                class="absolute inset-0 h-full w-full object-cover"
+                width="480"
+                height="640"
+                loading="lazy"
+                decoding="async"
+              />
+              <div
+                class="absolute inset-0 bg-[linear-gradient(180deg,transparent_22%,rgba(8,16,58,0.28)_48%,rgba(6,14,52,0.78)_72%,rgba(4,10,42,0.94)_100%)]"
+                aria-hidden="true"
+              />
+              <div class="relative z-10 flex h-full min-h-[18rem] flex-col justify-end p-5 text-white sm:min-h-[20rem] sm:p-6">
+                <h3 class="font-dm text-lg font-bold leading-tight sm:text-xl">{item.title}</h3>
+                <p class="mt-2 text-sm leading-[1.45] text-white/90">{item.body}</p>
+              </div>
             </article>
           </MotionReveal>
         ))
@@ -37,9 +34,3 @@ import MotionReveal from "@components/islands/MotionReveal";
     </div>
   </div>
 </section>
-
-<style>
-  .equipos-photo {
-    box-shadow: 0 18px 40px rgb(13 17 70 / 0.12);
-  }
-</style>

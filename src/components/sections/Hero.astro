@@ -9,7 +9,7 @@ import MotionScope from "@components/islands/MotionScope";
   class="hero relative z-20 overflow-visible bg-brand-navy"
   aria-labelledby="hero-heading"
 >
-  <div class="hero-frame relative min-h-[100svh] overflow-hidden">
+  <div class="hero-frame relative min-h-[36rem] overflow-hidden md:h-[620px] md:min-h-0 lg:h-[640px] xl:h-[700px] 2xl:h-[760px] 3xl:h-[812px]">
     <div class="hero-media" aria-hidden="true">
       <picture class="hero-media__picture">
         <source media="(min-width: 768px)" srcset={hero.image.src} />
@@ -25,32 +25,32 @@ import MotionScope from "@components/islands/MotionScope";
     </div>
 
     <div
-      class="container relative z-10 flex min-h-[100svh] flex-col justify-center pb-40 pt-24 sm:pb-44 md:pb-48 lg:pb-52"
+      class="container relative z-10 flex min-h-[36rem] flex-col justify-center pb-40 pt-24 md:h-full md:min-h-0 md:pb-32"
     >
       <MotionScope
         client:load
         trigger="mount"
         variant="up"
         staggerDelay={0.16}
-        className="max-w-[20rem] text-white xs:max-w-[22rem] sm:max-w-md md:max-w-[36rem] lg:max-w-[42rem]"
+        className="max-w-[20rem] font-dm text-white xs:max-w-[22rem] sm:max-w-md md:max-w-[529px]"
       >
         <h1
           id="hero-heading"
           data-motion-item
-          class="text-[1.7rem] font-bold leading-[1.12] tracking-tight text-white xs:text-[1.9rem] sm:text-[2.2rem] md:text-[2.55rem] lg:text-[2.85rem]"
+          class="max-w-[517px] font-serif text-[1.85rem] font-semibold leading-[1.2] text-white sm:text-[2.4rem] md:text-[3rem] md:leading-[60px]"
         >
           {hero.headline}
         </h1>
         <p
           data-motion-item
-          class="mt-4 text-[1.05rem] font-medium leading-[1.55] text-white/92 xs:text-[1.15rem] sm:mt-5 sm:text-[1.25rem] md:text-[1.35rem] md:leading-[1.5] lg:text-[1.45rem]"
+          class="mt-3 max-w-[529px] text-[0.95rem] font-normal leading-[1.4] text-white sm:text-base md:mt-[12px] md:text-[18px] md:leading-[25px]"
         >
           {hero.body}
         </p>
         <div data-motion-item>
           <a
             href={hero.cta.href}
-            class="mt-7 inline-flex items-center rounded-full bg-brand-blue px-7 py-3 text-[0.95rem] font-bold text-white transition hover:bg-brand-blue-hover sm:mt-8 sm:px-8 sm:py-3.5"
+            class="mt-5 inline-flex min-w-[11.75rem] items-center justify-center rounded-[20px] bg-[#7C63C9] px-2.5 py-2.5 text-base font-semibold text-white transition hover:bg-[#6d54b8] md:mt-[19px] md:text-[20px] md:leading-[25px]"
           >
             {hero.cta.label}
           </a>
@@ -104,7 +104,7 @@ import MotionScope from "@components/islands/MotionScope";
 
   @media (max-width: 767px) {
     .hero-media__photo {
-      object-position: 58% 42%;
+      object-position: 72% 70%;
     }
   }
 
@@ -130,11 +130,10 @@ import MotionScope from "@components/islands/MotionScope";
   .hero-shade-desktop {
     background: linear-gradient(
       90deg,
-      rgba(13, 17, 70, 0.94) 0%,
-      rgba(22, 20, 86, 0.82) 22%,
-      rgba(46, 42, 110, 0.52) 44%,
-      rgba(46, 42, 110, 0.18) 66%,
-      transparent 86%
+      rgba(33, 30, 70, 0.8) 5%,
+      rgba(38, 35, 82, 0.71) 22%,
+      rgba(42, 39, 90, 0.65) 32%,
+      rgba(102, 102, 102, 0.05) 68%
     );
   }
 </style>

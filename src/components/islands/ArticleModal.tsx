@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
 import type { Article, ArticleBlock } from "@content/content";
+import { pauseSmoothScroll, resumeSmoothScroll } from "@lib/lenis";
 
 type Props = {
   article: Article | null;
@@ -42,6 +43,7 @@ function ArticleBody({ block }: { block: ArticleBlock }) {
 export default function ArticleModal({ article, closeLabel, onClose }: Props) {
   useEffect(() => {
     if (!article) return;
+    pauseSmoothScroll();
     const previous = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     const onKey = (event: KeyboardEvent) => {
@@ -50,6 +52,7 @@ export default function ArticleModal({ article, closeLabel, onClose }: Props) {
     window.addEventListener("keydown", onKey);
     return () => {
       document.body.style.overflow = previous;
+      resumeSmoothScroll();
       window.removeEventListener("keydown", onKey);
     };
   }, [article, onClose]);
@@ -88,7 +91,7 @@ export default function ArticleModal({ article, closeLabel, onClose }: Props) {
             </svg>
           </button>
         </div>
-        <div className="overflow-y-auto px-5 py-5 sm:px-7 sm:py-6">
+        <div data-lenis-prevent className="overflow-y-auto px-5 py-5 sm:px-7 sm:py-6">
           <img
             src={article.image.src}
             alt={article.image.alt}

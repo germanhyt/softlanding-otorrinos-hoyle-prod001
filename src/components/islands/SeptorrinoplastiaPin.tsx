@@ -1,5 +1,6 @@
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
+import { glideScroll, holdScroll } from "@lib/lenis";
 
 type Side = { title: string; body: string };
 
@@ -82,7 +83,7 @@ export default function SeptorrinoplastiaPin({ image, pair, detail }: Props) {
 
     const lockTo = (y: number) => {
       st.selfLock = true;
-      window.scrollTo(0, y);
+      holdScroll(y);
       window.setTimeout(() => {
         st.selfLock = false;
       }, 140);
@@ -144,7 +145,7 @@ export default function SeptorrinoplastiaPin({ image, pair, detail }: Props) {
         playSwap();
       } else if (st.step === 2) {
         st.step = 3;
-        window.scrollTo({ top: bottomOf() + 2, behavior: "smooth" });
+        glideScroll(bottomOf() + 2);
       }
     };
 
@@ -158,7 +159,7 @@ export default function SeptorrinoplastiaPin({ image, pair, detail }: Props) {
         st.exitUntil = performance.now() + 1800;
         hidePair();
         hideDetail();
-        window.scrollTo({ top: topOf() - window.innerHeight * 0.3, behavior: "smooth" });
+        glideScroll(topOf() - window.innerHeight * 0.3);
       }
     };
 
@@ -166,10 +167,9 @@ export default function SeptorrinoplastiaPin({ image, pair, detail }: Props) {
       if (st.selfLock || prog()) return;
       const y = window.scrollY;
       const t = topOf();
-      const b = bottomOf();
       if (st.step === 0) {
         if (performance.now() < st.exitUntil) return;
-        if (y >= t - 24) {
+        if (y >= t - 24 && y <= t + window.innerHeight * 0.45) {
           st.step = 1;
           st.wheelAcc = 0;
           st.touchAcc = 0;
@@ -177,7 +177,7 @@ export default function SeptorrinoplastiaPin({ image, pair, detail }: Props) {
           playEnter();
         }
       } else if (st.step === 1 || st.step === 2) {
-        if (y < t - 80) {
+        if (y < t - 80 || y > t + window.innerHeight * 0.35) {
           st.step = 0;
           st.wheelAcc = 0;
           st.touchAcc = 0;
@@ -198,6 +198,7 @@ export default function SeptorrinoplastiaPin({ image, pair, detail }: Props) {
     const onWheel = (event: WheelEvent) => {
       if (st.step !== 1 && st.step !== 2) return;
       event.preventDefault();
+      event.stopPropagation();
       if (st.busy || performance.now() < st.coolUntil) return;
       if (event.deltaY === 0) return;
       st.wheelAcc += event.deltaY;
@@ -216,6 +217,7 @@ export default function SeptorrinoplastiaPin({ image, pair, detail }: Props) {
     const onTouchMove = (event: TouchEvent) => {
       if (st.step !== 1 && st.step !== 2) return;
       event.preventDefault();
+      event.stopPropagation();
       if (st.busy || performance.now() < st.coolUntil) return;
       const y = event.touches[0]?.clientY ?? st.touchY;
       const delta = st.touchY - y;
@@ -242,16 +244,16 @@ export default function SeptorrinoplastiaPin({ image, pair, detail }: Props) {
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("wheel", onWheel, { passive: false });
+    window.addEventListener("wheel", onWheel, { passive: false, capture: true });
     window.addEventListener("touchstart", onTouchStart, { passive: true });
-    window.addEventListener("touchmove", onTouchMove, { passive: false });
+    window.addEventListener("touchmove", onTouchMove, { passive: false, capture: true });
     window.addEventListener("keydown", onKey);
 
     return () => {
       window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("wheel", onWheel);
+      window.removeEventListener("wheel", onWheel, true);
       window.removeEventListener("touchstart", onTouchStart);
-      window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("touchmove", onTouchMove, true);
       window.removeEventListener("keydown", onKey);
       gsap.killTweensOf([left, right, detailEl, bg]);
     };

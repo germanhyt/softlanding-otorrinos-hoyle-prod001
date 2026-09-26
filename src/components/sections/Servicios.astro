@@ -107,6 +107,7 @@ import MotionReveal from "@components/islands/MotionReveal";
 
 <script>
   import gsap from "gsap";
+  import { holdScroll, releaseScroll } from "@lib/lenis";
 
   const section = document.querySelector<HTMLElement>(".servicios");
   const viewport = document.querySelector<HTMLElement>("[data-servicios-viewport]");
@@ -212,12 +213,16 @@ import MotionReveal from "@components/islands/MotionReveal";
       const holdingUp = deltaY < 0 && !atStart() && y >= lock - 2 && y <= lock + 72;
       if (approaching || holdingDown || holdingUp) {
         holding = true;
-        window.scrollTo(0, lock);
+        holdScroll(lock);
         lastWritten = lock;
         holding = false;
         advance(deltaY);
         return true;
       }
+
+      const leavingDown = deltaY > 0 && done() && y >= lock - 2;
+      const leavingUp = deltaY < 0 && atStart() && y >= lock - 2 && y <= lock + 72;
+      if (leavingDown || leavingUp) releaseScroll();
 
       return false;
     };
@@ -225,9 +230,11 @@ import MotionReveal from "@components/islands/MotionReveal";
     window.addEventListener(
       "wheel",
       (event) => {
-        if (nudge(event.deltaY)) event.preventDefault();
+        if (!nudge(event.deltaY)) return;
+        event.preventDefault();
+        event.stopPropagation();
       },
-      { passive: false },
+      { passive: false, capture: true },
     );
 
     let touchY = 0;
@@ -244,9 +251,11 @@ import MotionReveal from "@components/islands/MotionReveal";
         const y = event.touches[0]?.clientY ?? touchY;
         const delta = touchY - y;
         touchY = y;
-        if (nudge(delta)) event.preventDefault();
+        if (!nudge(delta)) return;
+        event.preventDefault();
+        event.stopPropagation();
       },
-      { passive: false },
+      { passive: false, capture: true },
     );
 
     window.addEventListener("keydown", (event) => {
@@ -268,14 +277,16 @@ import MotionReveal from "@components/islands/MotionReveal";
         const y = window.scrollY;
         if (y + window.innerHeight < sectionTop() - 24) {
           if (!atStart()) reset();
+          releaseScroll();
           lastWritten = y;
           return;
         }
         const lock = lockY();
         const overshoot = y - lock;
+        if (done() && overshoot > 80) releaseScroll();
         if (!done() && overshoot > 1 && overshoot < 140 && Math.abs(y - lastWritten) < 160) {
           holding = true;
-          window.scrollTo(0, lock);
+          holdScroll(lock);
           lastWritten = lock;
           holding = false;
           return;

@@ -110,6 +110,7 @@ export default function ContactForm({
       </label>
       <textarea
         id="contacto-mensaje"
+        data-lenis-prevent
         className={`${fieldClass} min-h-[8.5rem] resize-y sm:min-h-[9.5rem]`}
         placeholder={fields.message.placeholder}
         value={message}

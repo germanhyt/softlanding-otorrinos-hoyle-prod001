@@ -1,5 +1,6 @@
 import { useEffect, useId, useState } from "react";
 import { createPortal } from "react-dom";
+import { pauseSmoothScroll, resumeSmoothScroll } from "@lib/lenis";
 
 export type MobileNavLink = {
   label: string;
@@ -66,10 +67,12 @@ export default function MobileNav({ links, ctaHref, ctaLabel }: Props) {
 
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    pauseSmoothScroll();
     window.addEventListener("keydown", onKeyDown);
 
     return () => {
       document.body.style.overflow = previousOverflow;
+      resumeSmoothScroll();
       window.removeEventListener("keydown", onKeyDown);
     };
   }, [open]);
@@ -81,6 +84,7 @@ export default function MobileNav({ links, ctaHref, ctaLabel }: Props) {
     <nav
       id={panelId}
       aria-label="Menú móvil"
+      data-lenis-prevent
       className={`mobile-nav-clippy ${open ? "is-open" : ""}`}
       {...(!open ? { inert: true as const } : {})}
     >

@@ -28,6 +28,8 @@ export default {
       },
       fontFamily: {
         sans: ['"Plus Jakarta Sans"', "ui-sans-serif", "system-ui", "sans-serif"],
+        serif: ['"Roboto Serif"', "Georgia", "ui-serif", "serif"],
+        dm: ['"DM Sans"', "ui-sans-serif", "system-ui", "sans-serif"],
       },
       colors: {
         brand: {

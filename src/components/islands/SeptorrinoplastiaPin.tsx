@@ -117,23 +117,23 @@ export default function SeptorrinoplastiaPin({ image, pair, detail }: Props) {
         />
 
         <div className="relative z-10 flex h-full w-full items-center">
-          <div className="container grid w-full grid-cols-2 items-center gap-6 md:gap-16">
-            <div data-side="left" className="max-w-[18rem] text-white sm:max-w-xs md:max-w-md">
-              <h2 className="font-serif text-[2.9rem] font-medium leading-none sm:text-6xl md:text-7xl lg:text-[5.5rem]">
+          <div className="container grid w-full grid-cols-1 items-start gap-8 md:grid-cols-2 md:items-center md:gap-16">
+            <div data-side="left" className="max-w-[16rem] justify-self-start text-left text-white sm:max-w-xs md:max-w-md">
+              <h2 className="font-serif text-[2.6rem] font-medium leading-none sm:text-6xl md:text-7xl lg:text-[5.5rem]">
                 {pair.left.title}
               </h2>
-              <p className="mt-4 font-dm text-base text-white/90 sm:text-lg md:text-xl">
+              <p className="mt-3 font-dm text-base text-white/90 sm:mt-4 sm:text-lg md:text-xl">
                 {pair.left.body}
               </p>
             </div>
             <div
               data-side="right"
-              className="ml-auto max-w-[18rem] text-right text-white sm:max-w-xs md:max-w-md"
+              className="ml-auto max-w-[16rem] justify-self-end text-right text-white sm:max-w-xs md:max-w-md"
             >
-              <h2 className="font-serif text-[2.9rem] font-medium leading-none sm:text-6xl md:text-7xl lg:text-[5.5rem]">
+              <h2 className="font-serif text-[2.6rem] font-medium leading-none sm:text-6xl md:text-7xl lg:text-[5.5rem]">
                 {pair.right.title}
               </h2>
-              <p className="mt-4 font-dm text-base text-white/90 sm:text-lg md:text-xl">
+              <p className="mt-3 font-dm text-base text-white/90 sm:mt-4 sm:text-lg md:text-xl">
                 {pair.right.body}
               </p>
             </div>

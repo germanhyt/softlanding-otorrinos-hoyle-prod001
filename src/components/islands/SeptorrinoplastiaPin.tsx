@@ -100,7 +100,7 @@ export default function SeptorrinoplastiaPin({ image, pair, detail }: Props) {
       ref={rootRef}
       data-scene
       data-intro-end={INTRO_END}
-      className="relative h-[200svh] bg-brand-navy"
+      className="relative h-[165svh] bg-brand-navy md:h-[200svh]"
     >
       <div data-sticky className="sticky top-0 flex h-[100svh] items-center overflow-hidden">
         <img

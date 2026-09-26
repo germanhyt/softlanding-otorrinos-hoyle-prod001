@@ -38,8 +38,12 @@ import SeptorrinoplastiaPin from "@components/islands/SeptorrinoplastiaPin";
   const scene = document.querySelector<HTMLElement>("[data-scene]");
 
   if (scene && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    // El táctil fluye nativo: interceptar cada touchmove mata el impulso
+    // y obliga a varios gestos. Solo la rueda lleva paso guiado.
     const maxStep = 32;
     const lead = 58;
+    const ease = 0.12;
+    const factor = 0.26;
     let target = window.scrollY;
     let lastWritten = window.scrollY;
     let easing = false;
@@ -68,7 +72,7 @@ import SeptorrinoplastiaPin from "@components/islands/SeptorrinoplastiaPin";
         frame = 0;
         return;
       }
-      const next = current + delta * 0.12;
+      const next = current + delta * ease;
       window.scrollTo(0, next);
       lastWritten = next;
       frame = requestAnimationFrame(tick);
@@ -84,7 +88,7 @@ import SeptorrinoplastiaPin from "@components/islands/SeptorrinoplastiaPin";
         (current >= top && current <= bottom);
       if (!hits) return false;
 
-      const step = Math.sign(deltaY) * Math.min(Math.abs(deltaY) * 0.26, maxStep);
+      const step = Math.sign(deltaY) * Math.min(Math.abs(deltaY) * factor, maxStep);
       const visual = window.scrollY;
       lastWritten = visual;
       let proposed = current + step;
@@ -105,23 +109,5 @@ import SeptorrinoplastiaPin from "@components/islands/SeptorrinoplastiaPin";
       { passive: false },
     );
 
-    let touchY = 0;
-    window.addEventListener(
-      "touchstart",
-      (event) => {
-        touchY = event.touches[0]?.clientY ?? 0;
-      },
-      { passive: true },
-    );
-    window.addEventListener(
-      "touchmove",
-      (event) => {
-        const y = event.touches[0]?.clientY ?? touchY;
-        const delta = touchY - y;
-        touchY = y;
-        if (nudge(delta)) event.preventDefault();
-      },
-      { passive: false },
-    );
   }
 </script>

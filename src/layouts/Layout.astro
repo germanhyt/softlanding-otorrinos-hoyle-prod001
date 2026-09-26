@@ -80,6 +80,11 @@ const robotsContent = [
         const el = document.getElementById(id);
         if (!el) return null;
 
+        if (id === "servicios" && !reducedMotion()) {
+          const top = el.getBoundingClientRect().top + window.scrollY;
+          return Math.max(0, top + el.offsetHeight - window.innerHeight);
+        }
+
         if (id === "septorrinoplastia" && !reducedMotion()) {
           const scene = el.querySelector<HTMLElement>("[data-scene]") ?? el;
           const start = scene.getBoundingClientRect().top + window.scrollY;
@@ -98,7 +103,25 @@ const robotsContent = [
       function scrollToId(id: string, behavior: ScrollBehavior) {
         const top = destination(id);
         if (top == null) return;
+        const root = document.documentElement;
+        root.dataset.programmaticScroll = "1";
         window.scrollTo({ top, behavior });
+        const finish = () => {
+          delete root.dataset.programmaticScroll;
+        };
+        if (behavior === "auto") {
+          requestAnimationFrame(finish);
+          return;
+        }
+        const started = performance.now();
+        const watch = () => {
+          if (Math.abs(window.scrollY - top) < 2 || performance.now() - started > 2500) {
+            finish();
+            return;
+          }
+          requestAnimationFrame(watch);
+        };
+        requestAnimationFrame(watch);
       }
 
       document.addEventListener("click", (event) => {

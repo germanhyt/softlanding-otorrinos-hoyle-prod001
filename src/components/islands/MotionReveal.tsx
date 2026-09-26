@@ -11,6 +11,8 @@ type Props = {
   delay?: number;
   variant?: MotionVariantName;
   trigger?: "view" | "mount";
+  /** Scrub follows the scroll. Settle plays once and stays visible. */
+  mode?: "scrub" | "settle";
 };
 
 function cx(...parts: Array<string | undefined>) {
@@ -40,6 +42,7 @@ export default function MotionReveal({
   delay = 0,
   variant = "up",
   trigger = "view",
+  mode = "scrub",
 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -63,6 +66,31 @@ export default function MotionReveal({
           duration: 0.72,
           delay,
           ease: "power2.out",
+          onStart: () => el.classList.add("is-revealed"),
+        });
+        return;
+      }
+
+      if (mode === "settle") {
+        const soft = {
+          ...from,
+          y: typeof from.y === "number" ? from.y * 0.4 : from.y,
+          x: typeof from.x === "number" ? from.x * 0.4 : from.x,
+        };
+        ScrollTrigger.create({
+          trigger: el,
+          start: "top 88%",
+          once: true,
+          onEnter: () => {
+            gsap.fromTo(el, soft, {
+              ...rest,
+              duration: 1.15,
+              delay,
+              ease: "power2.out",
+              overwrite: "auto",
+              onStart: () => el.classList.add("is-revealed"),
+            });
+          },
         });
         return;
       }
@@ -81,7 +109,7 @@ export default function MotionReveal({
     }, el);
 
     return () => ctx.revert();
-  }, [delay, trigger, variant]);
+  }, [delay, mode, trigger, variant]);
 
   return (
     <div ref={ref} className={cx("motion-reveal", className)}>

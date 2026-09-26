@@ -47,7 +47,7 @@ export const nosotros = {
   headline: "Más de una generación dedicada a la salud",
   paragraphs: [
     "Somos un equipo de médicos otorrinolaringólogos comprometidos con brindar una atención basada en evidencia científica, experiencia clínica y un acompañamiento cercano a cada paciente.",
-    "En Hoyle Otorrinolaringólogos creemos que cada paciente merece una evaluación integral, un diagnóstico preciso y un plan de tratamiento diseñado específicamente para sus necesidades, ya sea un niño o un adulto.",
+    "En Hoyle Otorrinos creemos que cada paciente merece una evaluación integral, un diagnóstico preciso y un plan de tratamiento diseñado específicamente para sus necesidades, ya sea un niño o un adulto.",
   ],
   image: {
     src: "/assets/sections/2/nosotros.webp",
@@ -690,7 +690,7 @@ export const faq = {
 
 export const footer = {
   tagline:
-    "Otorrinolaringólogos para niños y adultos. Diagnóstico preciso y trato cercano en cada consulta.",
+    "Otorrinos para niños y adultos. Diagnóstico preciso y trato cercano en cada consulta.",
   exploreTitle: "Explora",
   contactTitle: "Contacto",
   explore: navLinks,

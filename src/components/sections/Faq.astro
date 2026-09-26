@@ -10,7 +10,7 @@ import FaqAccordion from "@components/islands/FaqAccordion";
   aria-labelledby="faq-heading"
 >
   <div class="container">
-    <MotionReveal client:load variant="up" className="mx-auto max-w-3xl text-center">
+    <MotionReveal client:load variant="up" mode="settle" className="mx-auto max-w-3xl text-center">
       <h2
         id="faq-heading"
         class="font-serif text-[1.85rem] font-medium leading-[1.15] text-[#211E46] sm:text-[2.35rem] md:text-[2.75rem]"
@@ -19,8 +19,8 @@ import FaqAccordion from "@components/islands/FaqAccordion";
       </h2>
     </MotionReveal>
 
-    <MotionReveal client:load variant="up" delay={0.12} className="mt-8 sm:mt-10">
-      <FaqAccordion client:visible items={faq.items} />
+    <MotionReveal client:load variant="up" mode="settle" delay={0.12} className="mt-8 sm:mt-10">
+      <FaqAccordion client:load items={faq.items} />
     </MotionReveal>
   </div>
 </section>

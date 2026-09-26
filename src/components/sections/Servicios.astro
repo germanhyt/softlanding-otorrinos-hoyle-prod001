@@ -5,9 +5,10 @@ import MotionReveal from "@components/islands/MotionReveal";
 
 <section
   id={servicios.id}
-  class="servicios overflow-hidden bg-brand-navy py-12 md:py-14 lg:py-16"
+  class="servicios bg-brand-navy py-12 md:py-14 lg:py-16"
   aria-labelledby="servicios-heading"
 >
+  <div data-servicios-scene>
   <div class="container">
     <div class="grid items-end gap-5 md:grid-cols-[minmax(0,1.05fr)_minmax(0,0.9fr)] md:gap-10 lg:gap-16">
       <MotionReveal client:load variant="left">
@@ -25,8 +26,8 @@ import MotionReveal from "@components/islands/MotionReveal";
       </MotionReveal>
     </div>
 
-    <MotionReveal client:load variant="up" delay={0.12} className="mt-8 sm:mt-10 lg:mt-12">
-      <div class="servicios-track flex gap-4 sm:gap-5">
+    <div data-servicios-viewport class="mt-6 overflow-hidden md:mt-8">
+      <div data-servicios-track class="servicios-track flex w-max gap-4 sm:gap-5">
       {
         servicios.cards.map((card) => (
           <article class="servicios-card relative isolate min-h-[12.5rem] shrink-0 overflow-hidden rounded-[1.25rem] bg-white px-6 py-6 sm:min-h-[13.5rem] sm:px-7 sm:py-7">
@@ -50,16 +51,20 @@ import MotionReveal from "@components/islands/MotionReveal";
         ))
       }
       </div>
-    </MotionReveal>
+    </div>
+  </div>
   </div>
 </section>
 
 <style>
   .servicios-track {
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
     padding-bottom: 0.25rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .servicios [data-servicios-viewport] {
+      overflow-x: auto;
+    }
   }
 
   .servicios-track::-webkit-scrollbar {
@@ -67,20 +72,23 @@ import MotionReveal from "@components/islands/MotionReveal";
   }
 
   .servicios-card {
-    flex-basis: 86%;
+    flex: 0 0 min(18.5rem, 78vw);
+    width: min(18.5rem, 78vw);
     scroll-snap-align: start;
     box-shadow: 0 10px 28px rgb(0 0 0 / 0.12);
   }
 
   @media (min-width: 640px) {
     .servicios-card {
-      flex-basis: 48%;
+      flex-basis: 20rem;
+      width: 20rem;
     }
   }
 
   @media (min-width: 1024px) {
     .servicios-card {
-      flex-basis: calc((100% - 2.5rem) / 3.2);
+      flex-basis: 22.5rem;
+      width: 22.5rem;
     }
   }
 
@@ -92,3 +100,140 @@ import MotionReveal from "@components/islands/MotionReveal";
     transform: translate(18%, 16%);
   }
 </style>
+
+<script>
+  import gsap from "gsap";
+
+  const section = document.querySelector<HTMLElement>(".servicios");
+  const viewport = document.querySelector<HTMLElement>("[data-servicios-viewport]");
+  const track = document.querySelector<HTMLElement>("[data-servicios-track]");
+
+  if (section && viewport && track && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const maxStep = 24;
+    const lead = 56;
+    let offset = 0;
+    let target = 0;
+    let frame = 0;
+    let lastWritten = window.scrollY;
+    let holding = false;
+
+    const travel = () => Math.max(0, track.scrollWidth - viewport.clientWidth);
+    const sectionTop = () => section.getBoundingClientRect().top + window.scrollY;
+    const lockY = () => Math.max(0, sectionTop() + section.offsetHeight - window.innerHeight);
+    const done = () => offset >= travel() - 1.5 && target >= travel() - 1.5;
+    const atStart = () => offset <= 1.5 && target <= 1.5;
+
+    const render = () => {
+      const delta = target - offset;
+      if (Math.abs(delta) < 0.5) {
+        offset = target;
+        gsap.set(track, { x: -offset });
+        frame = 0;
+        return;
+      }
+      offset += delta * 0.07;
+      gsap.set(track, { x: -offset });
+      frame = requestAnimationFrame(render);
+    };
+
+    const advance = (deltaY: number) => {
+      const span = travel();
+      const step = Math.sign(deltaY) * Math.min(Math.abs(deltaY) * 0.14, maxStep);
+      const next = Math.min(span, Math.max(0, target + step));
+      target = Math.min(Math.max(next, offset - lead), offset + lead);
+      if (!frame) frame = requestAnimationFrame(render);
+    };
+
+    const reset = () => {
+      offset = 0;
+      target = 0;
+      gsap.set(track, { x: 0 });
+    };
+
+    const nudge = (deltaY: number) => {
+      const span = travel();
+      if (span <= 0 || deltaY === 0) return false;
+
+      if (document.documentElement.dataset.programmaticScroll === "1") return false;
+
+      const y = window.scrollY;
+      const lock = lockY();
+      const approaching = deltaY > 0 && !done() && y < lock && y + Math.min(Math.abs(deltaY), 180) >= lock;
+      const holdingDown = deltaY > 0 && !done() && y >= lock - 2 && y <= lock + 72;
+      const holdingUp = deltaY < 0 && !atStart() && y >= lock - 2 && y <= lock + 72;
+      if (approaching || holdingDown || holdingUp) {
+        holding = true;
+        window.scrollTo(0, lock);
+        lastWritten = lock;
+        holding = false;
+        advance(deltaY);
+        return true;
+      }
+
+      return false;
+    };
+
+    window.addEventListener(
+      "wheel",
+      (event) => {
+        if (nudge(event.deltaY)) event.preventDefault();
+      },
+      { passive: false },
+    );
+
+    let touchY = 0;
+    window.addEventListener(
+      "touchstart",
+      (event) => {
+        touchY = event.touches[0]?.clientY ?? 0;
+      },
+      { passive: true },
+    );
+    window.addEventListener(
+      "touchmove",
+      (event) => {
+        const y = event.touches[0]?.clientY ?? touchY;
+        const delta = touchY - y;
+        touchY = y;
+        if (nudge(delta)) event.preventDefault();
+      },
+      { passive: false },
+    );
+
+    window.addEventListener("keydown", (event) => {
+      const down = event.key === "ArrowDown" || event.key === "PageDown" || event.key === " ";
+      const up = event.key === "ArrowUp" || event.key === "PageUp";
+      if (!down && !up) return;
+      if (event.target instanceof HTMLElement && event.target.closest("input, textarea, select")) return;
+      const delta = down ? (event.key === "ArrowDown" ? 48 : 520) : event.key === "ArrowUp" ? -48 : -520;
+      if (nudge(delta)) event.preventDefault();
+    });
+
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (holding || document.documentElement.dataset.programmaticScroll === "1") {
+          lastWritten = window.scrollY;
+          return;
+        }
+        const y = window.scrollY;
+        if (y + window.innerHeight < sectionTop() - 24) {
+          if (!atStart()) reset();
+          lastWritten = y;
+          return;
+        }
+        const lock = lockY();
+        const overshoot = y - lock;
+        if (!done() && overshoot > 1 && overshoot < 140 && Math.abs(y - lastWritten) < 160) {
+          holding = true;
+          window.scrollTo(0, lock);
+          lastWritten = lock;
+          holding = false;
+          return;
+        }
+        lastWritten = y;
+      },
+      { passive: true },
+    );
+  }
+</script>

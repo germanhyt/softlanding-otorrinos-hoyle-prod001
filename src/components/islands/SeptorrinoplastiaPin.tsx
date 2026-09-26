@@ -10,11 +10,12 @@ type Props = {
   detail: { title: string; body: string; cta: { label: string; href: string } };
 };
 
-const INTRO = 0.85;
-const HOLD = 1.2;
-const SWAP = 0.7;
+const INTRO = 0.7;
+const HOLD = 0.6;
+const SWAP = 0.55;
+const TAIL = 0.4;
 /** Scroll fraction where Función and Armonía are already at rest. */
-const INTRO_END = INTRO / (INTRO + HOLD + SWAP + HOLD);
+const INTRO_END = INTRO / (INTRO + HOLD + SWAP + TAIL);
 
 export default function SeptorrinoplastiaPin({ image, pair, detail }: Props) {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -78,7 +79,7 @@ export default function SeptorrinoplastiaPin({ image, pair, detail }: Props) {
         .to({}, { duration: HOLD })
         .to([left, right], { autoAlpha: 0, y: -40, scale: 0.97, duration: SWAP }, "swap")
         .to(detailEl, { autoAlpha: 1, y: 0, scale: 1, duration: SWAP }, "swap")
-        .to({}, { duration: HOLD });
+        .to({}, { duration: TAIL });
       if (shade) timeline.to(shade, { opacity: 1, duration: SWAP }, "swap");
       // Fondo: respiración continua durante TODO el recorrido
       timeline.fromTo(
@@ -99,7 +100,7 @@ export default function SeptorrinoplastiaPin({ image, pair, detail }: Props) {
       ref={rootRef}
       data-scene
       data-intro-end={INTRO_END}
-      className="relative h-[253svh] bg-brand-navy"
+      className="relative h-[200svh] bg-brand-navy"
     >
       <div data-sticky className="sticky top-0 flex h-[100svh] items-center overflow-hidden">
         <img

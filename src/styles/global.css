@@ -284,7 +284,14 @@
   position: relative;
   z-index: 0;
   margin-top: 0;
-  padding-top: 11.5rem;
+  padding-top: 2.75rem;
+}
+
+@media (max-width: 767px) {
+  .hero-stats {
+    transform: none;
+    bottom: 1.25rem;
+  }
 }
 
 @media (min-width: 768px) {

@@ -88,12 +88,8 @@ const robotsContent = [
         if (id === "septorrinoplastia" && !reducedMotion()) {
           const scene = el.querySelector<HTMLElement>("[data-scene]") ?? el;
           const start = scene.getBoundingClientRect().top + window.scrollY;
-          const span = Math.max(0, scene.offsetHeight - window.innerHeight);
-          const introEnd = Number(scene.dataset.introEnd);
-          const fraction = Number.isFinite(introEnd) ? introEnd : 0;
-          // Just inside the hold, so Función and Armonía are fully in place
-          // while the sticky scene sits at the top of the viewport.
-          return start + span * fraction + 12;
+          // Al tope de la escena: la entrada del par se anima sola al llegar.
+          return Math.max(0, start);
         }
 
         const top = el.getBoundingClientRect().top + window.scrollY;

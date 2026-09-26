@@ -1,6 +1,6 @@
 import { siteConfig } from "./site.config";
 
-const title = "Hoyle Otorrinos | Otorrinolaringólogos para niños y adultos";
+const title = "Hoyle Otorrinos | Otorrinos para niños y adultos";
 const description =
   "En Hoyle Otorrinolaringólogos combinamos experiencia clínica, tecnología y un trato cercano para ofrecer diagnósticos precisos y tratamientos personalizados para niños y adultos.";
 const ogImagePath = "/assets/hero/hero--desktop.webp";

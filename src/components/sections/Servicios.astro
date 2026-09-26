@@ -26,7 +26,7 @@ import MotionReveal from "@components/islands/MotionReveal";
       </MotionReveal>
     </div>
 
-    <div data-servicios-viewport class="mt-6 overflow-hidden md:mt-8">
+    <div data-servicios-viewport class="servicios-viewport mt-6 overflow-hidden md:mt-8">
       <div data-servicios-track class="servicios-track flex w-max gap-4 sm:gap-5">
       {
         servicios.cards.map((card) => (
@@ -57,6 +57,10 @@ import MotionReveal from "@components/islands/MotionReveal";
 </section>
 
 <style>
+  .servicios-viewport {
+    container-type: inline-size;
+  }
+
   .servicios-track {
     padding-bottom: 0.25rem;
   }
@@ -72,23 +76,23 @@ import MotionReveal from "@components/islands/MotionReveal";
   }
 
   .servicios-card {
-    flex: 0 0 min(18.5rem, 78vw);
-    width: min(18.5rem, 78vw);
+    flex: 0 0 100cqi;
+    width: 100cqi;
     scroll-snap-align: start;
     box-shadow: 0 10px 28px rgb(0 0 0 / 0.12);
   }
 
   @media (min-width: 640px) {
     .servicios-card {
-      flex-basis: 20rem;
-      width: 20rem;
+      flex-basis: calc((100cqi - 1.25rem) / 2);
+      width: calc((100cqi - 1.25rem) / 2);
     }
   }
 
   @media (min-width: 1024px) {
     .servicios-card {
-      flex-basis: 22.5rem;
-      width: 22.5rem;
+      flex-basis: calc((100cqi - 2.5rem) / 3);
+      width: calc((100cqi - 2.5rem) / 3);
     }
   }
 
@@ -109,11 +113,11 @@ import MotionReveal from "@components/islands/MotionReveal";
   const track = document.querySelector<HTMLElement>("[data-servicios-track]");
 
   if (section && viewport && track && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    const maxStep = 24;
-    const lead = 56;
+    const motion = { x: 0 };
     let offset = 0;
     let target = 0;
-    let frame = 0;
+    let wheelAccum = 0;
+    let lockUntil = 0;
     let lastWritten = window.scrollY;
     let holding = false;
 
@@ -122,31 +126,76 @@ import MotionReveal from "@components/islands/MotionReveal";
     const lockY = () => Math.max(0, sectionTop() + section.offsetHeight - window.innerHeight);
     const done = () => offset >= travel() - 1.5 && target >= travel() - 1.5;
     const atStart = () => offset <= 1.5 && target <= 1.5;
+    const isMobile = () => window.matchMedia("(max-width: 767px)").matches;
 
-    const render = () => {
-      const delta = target - offset;
-      if (Math.abs(delta) < 0.5) {
-        offset = target;
-        gsap.set(track, { x: -offset });
-        frame = 0;
-        return;
-      }
-      offset += delta * 0.07;
-      gsap.set(track, { x: -offset });
-      frame = requestAnimationFrame(render);
+    const stepSize = () => {
+      const card = track.querySelector<HTMLElement>(".servicios-card");
+      if (!card) return 0;
+      const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+      return card.getBoundingClientRect().width + gap;
+    };
+
+    const clampStep = (value: number) => {
+      const span = travel();
+      const step = stepSize();
+      if (step <= 0) return Math.min(span, Math.max(0, value));
+      const snapped = Math.round(value / step) * step;
+      if (span - snapped < step * 0.35) return span;
+      return Math.min(span, Math.max(0, snapped));
+    };
+
+    const glide = (next: number) => {
+      const seconds = isMobile() ? 0.92 : 1.08;
+      lockUntil = performance.now() + seconds * 1000 + 140;
+      target = next;
+      gsap.killTweensOf(motion);
+      gsap.to(motion, {
+        x: next,
+        duration: seconds,
+        ease: "power2.inOut",
+        onUpdate: () => {
+          offset = motion.x;
+          gsap.set(track, { x: -offset });
+        },
+        onComplete: () => {
+          offset = next;
+          motion.x = next;
+          gsap.set(track, { x: -offset });
+          wheelAccum = 0;
+        },
+      });
+    };
+
+    const stepBy = (dir: number) => {
+      const step = stepSize();
+      const span = travel();
+      if (step <= 0 || dir === 0 || span <= 0) return false;
+      const current = target;
+      let next = clampStep(current + dir * step);
+      if (dir > 0 && span - current <= step * 0.35) next = span;
+      if (dir < 0 && current <= step * 0.35) next = 0;
+      if (Math.abs(next - current) < 1) return false;
+      glide(next);
+      return true;
     };
 
     const advance = (deltaY: number) => {
-      const span = travel();
-      const step = Math.sign(deltaY) * Math.min(Math.abs(deltaY) * 0.14, maxStep);
-      const next = Math.min(span, Math.max(0, target + step));
-      target = Math.min(Math.max(next, offset - lead), offset + lead);
-      if (!frame) frame = requestAnimationFrame(render);
+      if (performance.now() < lockUntil) return;
+      wheelAccum += deltaY;
+      const need = isMobile() ? 42 : 72;
+      if (Math.abs(wheelAccum) < need) return;
+      const dir = Math.sign(wheelAccum);
+      wheelAccum = 0;
+      stepBy(dir);
     };
 
     const reset = () => {
+      gsap.killTweensOf(motion);
       offset = 0;
       target = 0;
+      motion.x = 0;
+      wheelAccum = 0;
+      lockUntil = 0;
       gsap.set(track, { x: 0 });
     };
 
@@ -235,5 +284,16 @@ import MotionReveal from "@components/islands/MotionReveal";
       },
       { passive: true },
     );
+
+    window.addEventListener("resize", () => {
+      gsap.killTweensOf(motion);
+      const span = travel();
+      offset = clampStep(Math.min(offset, span));
+      target = offset;
+      motion.x = offset;
+      wheelAccum = 0;
+      lockUntil = 0;
+      gsap.set(track, { x: -offset });
+    });
   }
 </script>

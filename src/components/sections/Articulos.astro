@@ -10,7 +10,7 @@ import ArticlesCarousel from "@components/islands/ArticlesCarousel";
   aria-labelledby="articulos-heading"
 >
   <div class="container">
-    <MotionReveal client:visible variant="up">
+    <MotionReveal client:load variant="up">
       <h2
         id="articulos-heading"
         class="font-serif text-[1.85rem] font-medium leading-[1.15] text-[#211E46] sm:text-[2.35rem] md:text-[2.75rem]"
@@ -19,7 +19,7 @@ import ArticlesCarousel from "@components/islands/ArticlesCarousel";
       </h2>
     </MotionReveal>
 
-    <MotionReveal client:visible variant="up" delay={0.1} className="mt-8 sm:mt-10">
+    <MotionReveal client:load variant="scale" delay={0.15} className="mt-8 sm:mt-10">
       <ArticlesCarousel
         client:visible
         items={articulos.items}

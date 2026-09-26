@@ -33,7 +33,9 @@
 
   html,
   body {
-    @apply max-w-full overflow-x-hidden;
+    @apply max-w-full;
+    /* clip (no hidden) para no romper el sticky de Septorrinoplastia */
+    overflow-x: clip;
   }
 
   body {
@@ -321,5 +323,14 @@ html.js .hero-stats:not(.is-revealed) {
   html.js .motion-reveal,
   html.js .hero-stats {
     opacity: 1;
+  }
+}
+
+/* 3xl and above keep the 2xl container so the page does not stretch. */
+@media (min-width: 1920px) {
+  .container {
+    max-width: 1536px;
+    padding-right: 6rem;
+    padding-left: 6rem;
   }
 }

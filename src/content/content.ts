@@ -1,11 +1,10 @@
 import { siteConfig } from "@config/site.config";
 
 export const navLinks = [
-  { label: "Inicio", href: "#inicio" },
   { label: "Nosotros", href: "#nosotros" },
   { label: "Servicios", href: "#servicios" },
-  { label: "Atención especializada", href: "#atencion" },
   { label: "Septorrinoplastia", href: "#septorrinoplastia" },
+  { label: "Atención especializada", href: "#atencion" },
   { label: "Contáctanos", href: "#contacto" },
   { label: "Resolvemos tus dudas", href: "#faq" },
 ] as const;

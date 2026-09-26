@@ -17,10 +17,17 @@ import SeptorrinoplastiaPin from "@components/islands/SeptorrinoplastiaPin";
     .septorrinoplastia :global([data-detail]) {
       position: relative;
       inset: auto;
+      opacity: 1;
       padding-bottom: 4rem;
     }
 
-    .septorrinoplastia :global(.h-\[100svh\]) {
+    .septorrinoplastia :global([data-scene]) {
+      height: auto;
+    }
+
+    .septorrinoplastia :global([data-sticky]) {
+      position: relative;
+      top: auto;
       height: auto;
       min-height: 100svh;
     }

@@ -63,5 +63,77 @@ const robotsContent = [
   </head>
   <body class="flex min-h-screen flex-col">
     <slot />
+    <script>
+      const menuRoot = "#site-header, footer, .mobile-nav-clippy";
+
+      function headerOffset(): number {
+        return document.getElementById("site-header")?.offsetHeight ?? 72;
+      }
+
+      function reducedMotion(): boolean {
+        return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      }
+
+      function destination(id: string): number | null {
+        if (id === "inicio") return 0;
+
+        const el = document.getElementById(id);
+        if (!el) return null;
+
+        if (id === "septorrinoplastia" && !reducedMotion()) {
+          const scene = el.querySelector<HTMLElement>("[data-scene]") ?? el;
+          const start = scene.getBoundingClientRect().top + window.scrollY;
+          const span = Math.max(0, scene.offsetHeight - window.innerHeight);
+          const introEnd = Number(scene.dataset.introEnd);
+          const fraction = Number.isFinite(introEnd) ? introEnd : 0;
+          // Just inside the hold, so Función and Armonía are fully in place
+          // while the sticky scene sits at the top of the viewport.
+          return start + span * fraction + 12;
+        }
+
+        const top = el.getBoundingClientRect().top + window.scrollY;
+        return Math.max(0, top - headerOffset());
+      }
+
+      function scrollToId(id: string, behavior: ScrollBehavior) {
+        const top = destination(id);
+        if (top == null) return;
+        window.scrollTo({ top, behavior });
+      }
+
+      document.addEventListener("click", (event) => {
+        const target = event.target;
+        if (!(target instanceof Element)) return;
+
+        const link = target.closest("a[href^='#']");
+        if (!link || !link.closest(menuRoot)) return;
+
+        const href = link.getAttribute("href");
+        if (!href || href.length < 2) return;
+
+        const id = decodeURIComponent(href.slice(1));
+        if (destination(id) == null) return;
+
+        event.preventDefault();
+        scrollToId(id, reducedMotion() ? "auto" : "smooth");
+
+        const next = `#${id}`;
+        if (location.hash !== next) history.pushState(null, "", next);
+      });
+
+      window.addEventListener("popstate", () => {
+        const id = decodeURIComponent(location.hash.replace(/^#/, ""));
+        if (!id) return;
+        scrollToId(id, reducedMotion() ? "auto" : "smooth");
+      });
+
+      const placeSeptorrinoplastia = () => {
+        if (location.hash !== "#septorrinoplastia") return;
+        scrollToId("septorrinoplastia", "auto");
+      };
+
+      placeSeptorrinoplastia();
+      window.addEventListener("load", placeSeptorrinoplastia);
+    </script>
   </body>
 </html>

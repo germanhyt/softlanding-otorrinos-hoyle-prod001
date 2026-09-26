@@ -1,6 +1,8 @@
 ---
 import { equipos } from "@content/content";
 import MotionReveal from "@components/islands/MotionReveal";
+
+const itemVariants = ["left", "up", "right", "up"] as const;
 ---
 
 <section class="equipos bg-brand-neutral-mist pb-10 pt-5 md:pb-12 md:pt-6 lg:pb-14" aria-label={equipos.headline}>
@@ -8,7 +10,7 @@ import MotionReveal from "@components/islands/MotionReveal";
     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
       {
         equipos.items.map((item, index) => (
-          <MotionReveal client:visible variant="up" delay={0.04 + index * 0.08}>
+          <MotionReveal client:load variant={itemVariants[index % 4]} delay={0.04 + index * 0.06}>
             <article class="equipo-card relative isolate min-h-[18rem] overflow-hidden rounded-[1.15rem] sm:min-h-[20rem]">
               <img
                 src={item.image.src}

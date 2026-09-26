@@ -11,7 +11,7 @@ import MotionReveal from "@components/islands/MotionReveal";
   <div
     class="container grid items-center gap-10 pb-10 md:grid-cols-2 md:gap-12 md:pb-12 lg:gap-16 lg:pb-14 xl:gap-20"
   >
-    <MotionReveal client:visible variant="left" className="max-w-[36rem]">
+    <MotionReveal client:load variant="left" className="max-w-[36rem]">
       <h2
         id="nosotros-heading"
         class="max-w-[589px] font-serif text-[1.85rem] font-semibold leading-[1.2] text-[#211E46] sm:text-[2.35rem] md:text-[3rem] md:leading-[60px]"
@@ -27,7 +27,7 @@ import MotionReveal from "@components/islands/MotionReveal";
       }
     </MotionReveal>
 
-    <MotionReveal client:visible variant="scale" delay={0.1}>
+    <MotionReveal client:load variant="right" delay={0.1}>
       <div class="nosotros-photo overflow-hidden rounded-[1.25rem]">
         <img
           src={nosotros.image.src}

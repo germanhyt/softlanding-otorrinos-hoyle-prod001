@@ -11,20 +11,20 @@ import ContactForm from "@components/islands/ContactForm";
   aria-labelledby="contacto-heading"
 >
   <div class="container">
-    <MotionReveal client:visible variant="up">
-      <div class="grid items-center gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16">
-        <div class="max-w-md">
-          <h2
-            id="contacto-heading"
-            class="max-w-[16rem] font-serif text-[2rem] font-medium leading-[1.12] text-[#211E46] sm:max-w-sm sm:text-[2.45rem] lg:text-[2.75rem]"
-          >
-            {contacto.headline}
-          </h2>
-          <p class="mt-5 max-w-sm font-dm text-sm leading-[1.55] text-[#3d4268] sm:text-base">
-            {contacto.body}
-          </p>
-        </div>
+    <div class="grid items-center gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16">
+      <MotionReveal client:load variant="left" className="max-w-md">
+        <h2
+          id="contacto-heading"
+          class="max-w-[16rem] font-serif text-[2rem] font-medium leading-[1.12] text-[#211E46] sm:max-w-sm sm:text-[2.45rem] lg:text-[2.75rem]"
+        >
+          {contacto.headline}
+        </h2>
+        <p class="mt-5 max-w-sm font-dm text-sm leading-[1.55] text-[#3d4268] sm:text-base">
+          {contacto.body}
+        </p>
+      </MotionReveal>
 
+      <MotionReveal client:load variant="right" delay={0.08}>
         <div class="rounded-[1.5rem] bg-[#F3F1F8] px-5 py-6 sm:px-7 sm:py-7 lg:px-8 lg:py-8">
           <ContactForm
             client:visible
@@ -37,7 +37,7 @@ import ContactForm from "@components/islands/ContactForm";
             validationBody={contacto.validationBody}
           />
         </div>
-      </div>
-    </MotionReveal>
+      </MotionReveal>
+    </div>
   </div>
 </section>

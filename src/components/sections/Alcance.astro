@@ -10,7 +10,7 @@ import ProceduresTabs from "@components/islands/ProceduresTabs";
   aria-labelledby="alcance-heading"
 >
   <div class="container">
-    <MotionReveal client:visible variant="up" className="mx-auto max-w-3xl text-center">
+    <MotionReveal client:load variant="up" className="mx-auto max-w-3xl text-center">
       <h2
         id="alcance-heading"
         class="text-[1.65rem] font-bold leading-[1.2] tracking-tight text-brand-navy xs:text-[1.85rem] sm:text-[2.05rem] md:text-[2.25rem] lg:text-[2.5rem]"
@@ -24,7 +24,7 @@ import ProceduresTabs from "@components/islands/ProceduresTabs";
       </p>
     </MotionReveal>
 
-    <MotionReveal client:visible variant="scale" delay={0.1} className="mt-8 sm:mt-10">
+    <MotionReveal client:load variant="scale" delay={0.1} className="mt-8 sm:mt-10">
       <ProceduresTabs
         client:visible
         tabs={alcance.tabs}
@@ -32,7 +32,7 @@ import ProceduresTabs from "@components/islands/ProceduresTabs";
       />
     </MotionReveal>
 
-    <MotionReveal client:visible variant="up" delay={0.18} className="mt-8 text-center sm:mt-10">
+    <MotionReveal client:load variant="up" delay={0.18} className="mt-8 text-center sm:mt-10">
       <a
         href={alcance.cta.href}
         class="inline-flex items-center rounded-full bg-[#7C63C9] px-8 py-3 text-[0.95rem] font-bold text-white transition hover:bg-[#6d54b8] sm:px-9 sm:py-3.5"

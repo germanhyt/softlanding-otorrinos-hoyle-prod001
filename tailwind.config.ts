@@ -4,6 +4,29 @@ import type { Config } from "tailwindcss";
 export default {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   theme: {
+    container: {
+      center: true,
+      padding: {
+        DEFAULT: "1rem",
+        sm: "1.2rem",
+        md: "1.5rem",
+        lg: "2rem",
+        xl: "3rem",
+        "2xl": "6rem",
+        "3xl": "6rem",
+        "4xl": "6rem",
+      },
+      screens: {
+        xs: "375px",
+        sm: "640px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1280px",
+        "2xl": "1536px",
+        "3xl": "1536px",
+        "4xl": "1536px",
+      },
+    },
     extend: {
       screens: {
         xs: "375px",
@@ -14,17 +37,6 @@ export default {
         "2xl": "1536px",
         "3xl": "1920px",
         "4xl": "2560px",
-      },
-      container: {
-        center: true,
-        padding: {
-          DEFAULT: "1rem",
-          sm: "1.2rem",
-          md: "1.5rem",
-          lg: "2rem",
-          xl: "3rem",
-          "2xl": "6rem",
-        },
       },
       fontFamily: {
         sans: ['"Plus Jakarta Sans"', "ui-sans-serif", "system-ui", "sans-serif"],

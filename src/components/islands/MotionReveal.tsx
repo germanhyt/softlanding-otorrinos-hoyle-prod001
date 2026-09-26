@@ -1,10 +1,9 @@
-import { useReducedMotion, motion } from "framer-motion";
-import type { ReactNode } from "react";
-import {
-  type MotionVariantName,
-  variantMap,
-  viewportScroll,
-} from "@lib/motion";
+import { useLayoutEffect, useRef, type ReactNode } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import type { MotionVariantName } from "@lib/motion";
+
+gsap.registerPlugin(ScrollTrigger);
 
 type Props = {
   children: ReactNode;
@@ -18,6 +17,23 @@ function cx(...parts: Array<string | undefined>) {
   return parts.filter(Boolean).join(" ");
 }
 
+function fromVars(variant: MotionVariantName): gsap.TweenVars {
+  switch (variant) {
+    case "left":
+      return { autoAlpha: 0, x: -64, y: 0, scale: 1 };
+    case "right":
+      return { autoAlpha: 0, x: 64, y: 0, scale: 1 };
+    case "scale":
+      return { autoAlpha: 0, x: 0, y: 40, scale: 0.96 };
+    case "fade":
+      return { autoAlpha: 0, x: 0, y: 0, scale: 1 };
+    default:
+      return { autoAlpha: 0, x: 0, y: 48, scale: 1 };
+  }
+}
+
+const rest = { autoAlpha: 1, x: 0, y: 0, scale: 1 };
+
 export default function MotionReveal({
   children,
   className,
@@ -25,38 +41,51 @@ export default function MotionReveal({
   variant = "up",
   trigger = "view",
 }: Props) {
-  const reduceMotion = useReducedMotion();
-  const variants = variantMap[variant];
-  const classes = cx("motion-reveal", className);
+  const ref = useRef<HTMLDivElement>(null);
 
-  if (reduceMotion) {
-    return <div className={cx(className, "is-revealed")}>{children}</div>;
-  }
+  useLayoutEffect(() => {
+    const el = ref.current;
+    if (!el) return;
 
-  if (trigger === "mount") {
-    return (
-      <motion.div
-        className={`${classes} is-revealed`}
-        variants={variants}
-        initial="hidden"
-        animate="visible"
-        custom={delay}
-      >
-        {children}
-      </motion.div>
-    );
-  }
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) {
+      gsap.set(el, rest);
+      el.classList.add("is-revealed");
+      return;
+    }
+
+    const from = fromVars(variant);
+    const lag = Math.round(delay * 140);
+    const ctx = gsap.context(() => {
+      if (trigger === "mount") {
+        gsap.fromTo(el, from, {
+          ...rest,
+          duration: 0.72,
+          delay,
+          ease: "power2.out",
+        });
+        return;
+      }
+
+      gsap.fromTo(el, from, {
+        ...rest,
+        ease: "none",
+        scrollTrigger: {
+          trigger: el,
+          start: `top bottom-=${lag}px`,
+          end: `top 62%-=${lag}px`,
+          scrub: true,
+          invalidateOnRefresh: true,
+        },
+      });
+    }, el);
+
+    return () => ctx.revert();
+  }, [delay, trigger, variant]);
 
   return (
-    <motion.div
-      className={`${classes} is-revealed`}
-      variants={variants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={viewportScroll}
-      custom={delay}
-    >
+    <div ref={ref} className={cx("motion-reveal", className)}>
       {children}
-    </motion.div>
+    </div>
   );
 }

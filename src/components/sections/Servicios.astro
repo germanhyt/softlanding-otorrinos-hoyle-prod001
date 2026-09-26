@@ -9,21 +9,24 @@ import MotionReveal from "@components/islands/MotionReveal";
   aria-labelledby="servicios-heading"
 >
   <div class="container">
-    <MotionReveal client:visible variant="up">
-      <div class="grid items-end gap-5 md:grid-cols-[minmax(0,1.05fr)_minmax(0,0.9fr)] md:gap-10 lg:gap-16">
+    <div class="grid items-end gap-5 md:grid-cols-[minmax(0,1.05fr)_minmax(0,0.9fr)] md:gap-10 lg:gap-16">
+      <MotionReveal client:load variant="left">
         <h2
           id="servicios-heading"
           class="max-w-[26rem] font-serif text-[1.85rem] font-semibold leading-[1.15] text-white sm:max-w-[32rem] sm:text-[2.35rem] md:max-w-[36rem] md:text-[2.6rem] md:leading-[55px] lg:text-[3rem]"
         >
           {servicios.headline}
         </h2>
+      </MotionReveal>
+      <MotionReveal client:load variant="right" delay={0.08}>
         <p class="max-w-[34rem] font-dm text-[0.95rem] font-normal leading-[1.45] text-white md:text-[18px] md:leading-[25px]">
           {servicios.intro}
         </p>
-      </div>
-    </MotionReveal>
+      </MotionReveal>
+    </div>
 
-    <div class="servicios-track mt-8 flex gap-4 sm:mt-10 sm:gap-5 lg:mt-12">
+    <MotionReveal client:load variant="up" delay={0.12} className="mt-8 sm:mt-10 lg:mt-12">
+      <div class="servicios-track flex gap-4 sm:gap-5">
       {
         servicios.cards.map((card) => (
           <article class="servicios-card relative isolate min-h-[12.5rem] shrink-0 overflow-hidden rounded-[1.25rem] bg-white px-6 py-6 sm:min-h-[13.5rem] sm:px-7 sm:py-7">
@@ -46,7 +49,8 @@ import MotionReveal from "@components/islands/MotionReveal";
           </article>
         ))
       }
-    </div>
+      </div>
+    </MotionReveal>
   </div>
 </section>
 

@@ -1,6 +1,8 @@
 ---
 import { atencion } from "@content/content";
 import MotionReveal from "@components/islands/MotionReveal";
+
+const cardVariants = ["left", "up", "right"] as const;
 ---
 
 <section
@@ -9,7 +11,7 @@ import MotionReveal from "@components/islands/MotionReveal";
   aria-labelledby="atencion-heading"
 >
   <div class="container">
-    <MotionReveal client:visible variant="up" className="mx-auto max-w-3xl text-center">
+    <MotionReveal client:load variant="up" className="mx-auto max-w-3xl text-center">
       <h2
         id="atencion-heading"
         class="font-serif text-[1.75rem] font-medium leading-[1.2] text-white xs:text-[2rem] sm:text-[2.25rem] md:text-[2.6rem] lg:text-[2.85rem]"
@@ -21,7 +23,7 @@ import MotionReveal from "@components/islands/MotionReveal";
     <div class="mt-8 grid grid-cols-1 gap-4 sm:mt-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
       {
         atencion.cards.map((card, index) => (
-          <MotionReveal client:visible variant="up" delay={0.04 + index * 0.1}>
+          <MotionReveal client:load variant={cardVariants[index % 3]} delay={0.04 + index * 0.08}>
             <article class="h-full rounded-[1.25rem] bg-white px-6 py-7 sm:rounded-[1.35rem] sm:px-7 sm:py-8">
               <h3 class="max-w-[12rem] font-serif text-[1.65rem] font-medium leading-[1.15] text-[#211E46] sm:text-[1.85rem]">
                 {card.title}
@@ -35,7 +37,7 @@ import MotionReveal from "@components/islands/MotionReveal";
       }
     </div>
 
-    <MotionReveal client:visible variant="up" delay={0.18} className="mt-8 text-center sm:mt-10">
+    <MotionReveal client:load variant="up" delay={0.18} className="mt-8 text-center sm:mt-10">
       <a
         href={atencion.cta.href}
         class="inline-flex items-center rounded-full bg-[#7C63C9] px-8 py-3 text-[0.95rem] font-bold text-white transition hover:bg-[#6d54b8] sm:px-9 sm:py-3.5"

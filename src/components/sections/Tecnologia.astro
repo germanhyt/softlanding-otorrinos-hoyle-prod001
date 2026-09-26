@@ -9,7 +9,7 @@ import MotionReveal from "@components/islands/MotionReveal";
   aria-labelledby="tecnologia-heading"
 >
   <div class="container">
-    <MotionReveal client:visible variant="up" className="max-w-3xl">
+    <MotionReveal client:load variant="left" className="max-w-3xl">
       <h2
         id="tecnologia-heading"
         class="max-w-[20rem] font-serif text-[1.85rem] font-semibold leading-[1.15] text-[#211E46] sm:max-w-2xl sm:text-[2.35rem] md:text-[2.75rem] md:leading-[1.12] lg:text-[3rem]"
@@ -21,7 +21,7 @@ import MotionReveal from "@components/islands/MotionReveal";
       </p>
     </MotionReveal>
 
-    <MotionReveal client:visible variant="scale" delay={0.08} className="mt-8 sm:mt-10">
+    <MotionReveal client:load variant="scale" delay={0.08} className="mt-8 sm:mt-10">
       <figure class="tecnologia-photo relative overflow-hidden rounded-[1.25rem] sm:rounded-[1.5rem]">
         <img
           src={tecnologia.image.src}

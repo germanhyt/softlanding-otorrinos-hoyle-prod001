@@ -1,6 +1,6 @@
 # Plan de implementación — Hoyle Otorrinos
 
-Landing estática de una sola página para **Hoyle Otorrinolaringólogos**. El objetivo es presentar la clínica, sus servicios y tecnología, y convertir visitas en citas (CTA **Agenda tu cita** → formulario → WhatsApp). Este plan se basa en [`SDD.md`](./SDD.md) y los prototipos en [`info/prototype/`](./info/prototype/), **sin modificar `SDD.md`**.
+Landing estática de una sola página para **Hoyle Otorrinos**. El objetivo es presentar la clínica, sus servicios y tecnología, y convertir visitas en citas (CTA **Agenda tu cita** → formulario → WhatsApp). Este plan se basa en [`SDD.md`](./SDD.md) y los prototipos en [`info/prototype/`](./info/prototype/), **sin modificar `SDD.md`**.
 
 Arquitectura, tokens de motion y convenciones reutilizan las landings Astro recientes (Laboratoria × L'Oréal / Colsubsidio / UTP): islands selectivos, `content.ts` centralizado, clip-path en menú mobile, count-up de stats, scroll-reveal suave.
 

@@ -22,17 +22,17 @@ export const logos = {
 
 export const hero = {
   id: "inicio",
-  title: "Hoyle Otorrinolaringólogos",
+  title: "Hoyle Otorrinos",
   headline: "Cuidamos tu salud respiratoria, auditiva y de garganta",
   body: "En Hoyle Otorrinos combinamos experiencia clínica, tecnología y un trato cercano para ofrecer diagnósticos precisos y tratamientos personalizados para niños y adultos.",
   cta: { label: "Agenda tu cita", href: siteConfig.ctaHref },
   image: {
     src: "/assets/hero/hero--desktop.webp",
-    alt: "Médico otorrinolaringólogo de Hoyle Otorrinos evaluando a una paciente",
+    alt: "Médico otorrino de Hoyle Otorrinos evaluando a una paciente",
   },
   imageMobile: {
     src: "/assets/hero/hero--mobile.webp",
-    alt: "Médico otorrinolaringólogo de Hoyle Otorrinos evaluando a una paciente",
+    alt: "Médico otorrino de Hoyle Otorrinos evaluando a una paciente",
   },
   stats: [
     { value: "+60", label: "Años de experiencia" },
@@ -46,12 +46,12 @@ export const nosotros = {
   id: "nosotros",
   headline: "Más de una generación dedicada a la salud",
   paragraphs: [
-    "Somos un equipo de médicos otorrinolaringólogos comprometidos con brindar una atención basada en evidencia científica, experiencia clínica y un acompañamiento cercano a cada paciente.",
+    "Somos un equipo de médicos otorrinos comprometidos con brindar una atención basada en evidencia científica, experiencia clínica y un acompañamiento cercano a cada paciente.",
     "En Hoyle Otorrinos creemos que cada paciente merece una evaluación integral, un diagnóstico preciso y un plan de tratamiento diseñado específicamente para sus necesidades, ya sea un niño o un adulto.",
   ],
   image: {
     src: "/assets/sections/2/nosotros.webp",
-    alt: "Dres. Juan F. Cano y Juan V. Cano, otorrinolaringólogos de Hoyle Otorrinos",
+    alt: "Dres. Juan F. Cano y Juan V. Cano, otorrinos de Hoyle Otorrinos",
   },
 } as const;
 
@@ -267,8 +267,8 @@ export const congresos = {
   photos: [
     {
       src: "/assets/sections/8/congreso-1.webp",
-      alt: "Participación en el Congreso Panamericano de Otorrinolaringología",
-      caption: "Participación en el Congreso Panamericano de Otorrinolaringología.",
+      alt: "Participación en el Congreso Panamericano de Otorrino",
+      caption: "Participación en el Congreso Panamericano de Otorrino.",
       area: "a",
     },
     {

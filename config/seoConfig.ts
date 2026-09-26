@@ -2,7 +2,7 @@ import { siteConfig } from "./site.config";
 
 const title = "Hoyle Otorrinos | Otorrinos para niños y adultos";
 const description =
-  "En Hoyle Otorrinolaringólogos combinamos experiencia clínica, tecnología y un trato cercano para ofrecer diagnósticos precisos y tratamientos personalizados para niños y adultos.";
+  "En Hoyle Otorrinos combinamos experiencia clínica, tecnología y un trato cercano para ofrecer diagnósticos precisos y tratamientos personalizados para niños y adultos.";
 const ogImagePath = "/assets/hero/hero--desktop.webp";
 const ogImage = `${siteConfig.siteUrl}${ogImagePath}`;
 
@@ -19,8 +19,7 @@ export const seoConfig = {
   author: siteConfig.legalName,
   keywords: [
     "Hoyle Otorrinos",
-    "Hoyle Otorrinolaringólogos",
-    "otorrinolaringólogo Perú",
+    "otorrino Perú",
     "otorrino Lima",
     "rinoplastia",
     "endoscopía nasal",
@@ -40,7 +39,7 @@ export const seoConfig = {
     imageWidth: 1440,
     imageHeight: 630,
     imageAlt:
-      "Médico otorrinolaringólogo de Hoyle Otorrinos realizando una evaluación clínica",
+      "Médico otorrino de Hoyle Otorrinos realizando una evaluación clínica",
   },
   twitter: {
     card: "summary_large_image" as const,

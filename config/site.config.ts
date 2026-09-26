@@ -3,7 +3,7 @@
  */
 export const siteConfig = {
   name: "Hoyle Otorrinos",
-  legalName: "Hoyle Otorrinolaringólogos",
+  legalName: "Hoyle Otorrinos",
   siteUrl: "https://hoyleotorrinos.pe",
   lang: "es-PE",
   locale: "es_PE",

@@ -13,7 +13,7 @@ Sobbre el proyecto:
 El proyecto es una landing para "Hoyle Otorrinos"
 
 Contexto con texto de Banner principal:
-"En Hoyle Otorrinolaringólogos combinamos experiencia clínica, tecnología y un trato cercano para ofrecer diagnósticos precisos y tratamientos personalizados para niños y adultos."
+"En Hoyle Otorrinos combinamos experiencia clínica, tecnología y un trato cercano para ofrecer diagnósticos precisos y tratamientos personalizados para niños y adultos."
 
 -----------------
 Rol:

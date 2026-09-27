@@ -185,7 +185,7 @@
     right: 0;
     height: 1.6px;
     border-radius: 99px;
-    background: currentColor;
+    background: #fff;
     transition:
       transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
       top 0.32s cubic-bezier(0.16, 1, 0.3, 1),
@@ -195,6 +195,12 @@
   .nav-burger span:nth-child(1) { top: 0; }
   .nav-burger span:nth-child(2) { top: 50%; transform: translateY(-50%); }
   .nav-burger span:nth-child(3) { bottom: 0; }
+
+  #site-header.is-solid .nav-burger-btn,
+  #site-header.is-nav-open .nav-burger-btn {
+    background-color: #0d1146;
+    color: #fff;
+  }
 
   .nav-burger.is-open span:nth-child(1) {
     top: 50%;

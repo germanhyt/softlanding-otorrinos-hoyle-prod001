@@ -21,25 +21,9 @@ export default function MobileNav({ links, ctaHref, ctaLabel }: Props) {
   const panelId = useId();
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const [solidHeader, setSolidHeader] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    const sync = () => {
-      const hero = document.getElementById("inicio");
-      const threshold = hero ? Math.max(hero.offsetHeight - 96, 80) : 120;
-      setSolidHeader(window.scrollY > threshold);
-    };
-    sync();
-    window.addEventListener("scroll", sync, { passive: true });
-    window.addEventListener("resize", sync);
-    return () => {
-      window.removeEventListener("scroll", sync);
-      window.removeEventListener("resize", sync);
-    };
   }, []);
 
   useEffect(() => {
@@ -78,7 +62,6 @@ export default function MobileNav({ links, ctaHref, ctaLabel }: Props) {
   }, [open]);
 
   const close = () => setOpen(false);
-  const iconOnDark = !solidHeader && !open;
 
   const panel = (
     <nav
@@ -115,11 +98,7 @@ export default function MobileNav({ links, ctaHref, ctaLabel }: Props) {
     <div className="ml-auto shrink-0 lg:hidden">
       <button
         type="button"
-        className={`nav-burger-btn relative z-[60] inline-flex h-11 w-11 items-center justify-center rounded-full transition ${
-          iconOnDark
-            ? "bg-white/12 text-white"
-            : "bg-brand-navy/5 text-brand-navy"
-        }`}
+        className="nav-burger-btn relative z-[60] inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/12 text-white transition"
         aria-label={open ? "Cerrar menú" : "Abrir menú"}
         aria-expanded={open}
         aria-controls={panelId}

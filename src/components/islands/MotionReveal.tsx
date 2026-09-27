@@ -13,6 +13,8 @@ type Props = {
   trigger?: "view" | "mount";
   /** Scrub follows the scroll. Settle plays once and stays visible. */
   mode?: "scrub" | "settle";
+  /** Skip the motion and stay visible from md up. */
+  mobileOnly?: boolean;
 };
 
 function cx(...parts: Array<string | undefined>) {
@@ -43,6 +45,7 @@ export default function MotionReveal({
   variant = "up",
   trigger = "view",
   mode = "scrub",
+  mobileOnly = false,
 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -51,7 +54,7 @@ export default function MotionReveal({
     if (!el) return;
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced) {
+    if (reduced || (mobileOnly && window.matchMedia("(min-width: 768px)").matches)) {
       gsap.set(el, rest);
       el.classList.add("is-revealed");
       return;
@@ -109,7 +112,7 @@ export default function MotionReveal({
     }, el);
 
     return () => ctx.revert();
-  }, [delay, mode, trigger, variant]);
+  }, [delay, mobileOnly, mode, trigger, variant]);
 
   return (
     <div ref={ref} className={cx("motion-reveal", className)}>

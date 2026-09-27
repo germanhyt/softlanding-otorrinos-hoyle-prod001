@@ -1,6 +1,8 @@
 ---
 import { servicios } from "@content/content";
 import MotionReveal from "@components/islands/MotionReveal";
+
+const cardVariants = ["left", "up", "right"] as const;
 ---
 
 <section
@@ -26,28 +28,36 @@ import MotionReveal from "@components/islands/MotionReveal";
       </MotionReveal>
     </div>
 
-    <div data-servicios-viewport class="servicios-viewport mt-6 overflow-visible md:mt-8 md:overflow-hidden">
+    <div data-servicios-viewport class="servicios-viewport mt-6 overflow-x-clip md:mt-8 md:overflow-hidden">
       <div data-servicios-track class="servicios-track flex w-full flex-col gap-4 md:w-max md:flex-row md:gap-5">
       {
-        servicios.cards.map((card) => (
-          <article class="servicios-card relative isolate min-h-[12.5rem] shrink-0 overflow-hidden rounded-[1.25rem] bg-white px-6 py-6 sm:min-h-[13.5rem] sm:px-7 sm:py-7">
-            <h3 class="servicios-card__copy relative z-10 font-dm text-xl font-bold tracking-tight text-brand-navy sm:text-[1.35rem]">
-              {card.title}
-            </h3>
-            <p class="servicios-card__copy relative z-10 mt-3 font-dm text-base leading-[1.5] text-[#3d4268] sm:text-[1.05rem]">
-              {card.body}
-            </p>
-            <img
-              src={card.icon}
-              alt=""
-              class="servicios-card__icon pointer-events-none absolute bottom-0 right-0 h-[7.25rem] w-[7.25rem] object-contain sm:h-[8rem] sm:w-[8rem]"
-              width="160"
-              height="160"
-              loading="lazy"
-              decoding="async"
-              aria-hidden="true"
-            />
-          </article>
+        servicios.cards.map((card, index) => (
+          <MotionReveal
+            client:load
+            mobileOnly
+            variant={cardVariants[index % 3]}
+            delay={0.04 + index * 0.08}
+            className="w-full md:contents"
+          >
+            <article class="servicios-card relative isolate min-h-[12.5rem] shrink-0 overflow-hidden rounded-[1.25rem] bg-white px-6 py-6 sm:min-h-[13.5rem] sm:px-7 sm:py-7">
+              <h3 class="servicios-card__copy relative z-10 font-dm text-xl font-bold tracking-tight text-brand-navy sm:text-[1.35rem]">
+                {card.title}
+              </h3>
+              <p class="servicios-card__copy relative z-10 mt-3 font-dm text-base leading-[1.5] text-[#3d4268] sm:text-[1.05rem]">
+                {card.body}
+              </p>
+              <img
+                src={card.icon}
+                alt=""
+                class="servicios-card__icon pointer-events-none absolute bottom-0 right-0 h-[7.25rem] w-[7.25rem] object-contain sm:h-[8rem] sm:w-[8rem]"
+                width="160"
+                height="160"
+                loading="lazy"
+                decoding="async"
+                aria-hidden="true"
+              />
+            </article>
+          </MotionReveal>
         ))
       }
       </div>
@@ -128,6 +138,7 @@ import MotionReveal from "@components/islands/MotionReveal";
     const done = () => offset >= travel() - 1.5 && target >= travel() - 1.5;
     const atStart = () => offset <= 1.5 && target <= 1.5;
     const isMobile = () => window.matchMedia("(max-width: 767px)").matches;
+    const mobileQuery = window.matchMedia("(max-width: 767px)");
 
     const stepSize = () => {
       const card = track.querySelector<HTMLElement>(".servicios-card");
@@ -271,6 +282,11 @@ import MotionReveal from "@components/islands/MotionReveal";
     window.addEventListener(
       "scroll",
       () => {
+        if (isMobile()) {
+          releaseScroll();
+          lastWritten = window.scrollY;
+          return;
+        }
         if (holding || document.documentElement.dataset.programmaticScroll === "1") {
           lastWritten = window.scrollY;
           return;
@@ -296,6 +312,14 @@ import MotionReveal from "@components/islands/MotionReveal";
       },
       { passive: true },
     );
+
+    const freeMobile = () => {
+      if (!isMobile()) return;
+      reset();
+      releaseScroll();
+    };
+    freeMobile();
+    mobileQuery.addEventListener("change", freeMobile);
 
     window.addEventListener("resize", () => {
       gsap.killTweensOf(motion);

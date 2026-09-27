@@ -82,7 +82,7 @@ const robotsContent = [
         const el = document.getElementById(id);
         if (!el) return null;
 
-        if (id === "servicios" && !reducedMotion()) {
+        if (id === "servicios" && !reducedMotion() && !window.matchMedia("(max-width: 767px)").matches) {
           const top = el.getBoundingClientRect().top + window.scrollY;
           return Math.max(0, top + el.offsetHeight - window.innerHeight);
         }

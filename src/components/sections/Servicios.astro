@@ -26,8 +26,8 @@ import MotionReveal from "@components/islands/MotionReveal";
       </MotionReveal>
     </div>
 
-    <div data-servicios-viewport class="servicios-viewport mt-6 overflow-hidden md:mt-8">
-      <div data-servicios-track class="servicios-track flex w-max gap-4 sm:gap-5">
+    <div data-servicios-viewport class="servicios-viewport mt-6 overflow-visible md:mt-8 md:overflow-hidden">
+      <div data-servicios-track class="servicios-track flex w-full flex-col gap-4 md:w-max md:flex-row md:gap-5">
       {
         servicios.cards.map((card) => (
           <article class="servicios-card relative isolate min-h-[12.5rem] shrink-0 overflow-hidden rounded-[1.25rem] bg-white px-6 py-6 sm:min-h-[13.5rem] sm:px-7 sm:py-7">
@@ -76,16 +76,16 @@ import MotionReveal from "@components/islands/MotionReveal";
   }
 
   .servicios-card {
-    flex: 0 0 100cqi;
-    width: 100cqi;
-    scroll-snap-align: start;
+    flex: 0 0 auto;
+    width: 100%;
     box-shadow: 0 10px 28px rgb(0 0 0 / 0.12);
   }
 
-  @media (min-width: 640px) {
+  @media (min-width: 768px) {
     .servicios-card {
-      flex-basis: calc((100cqi - 1.25rem) / 2);
+      flex: 0 0 calc((100cqi - 1.25rem) / 2);
       width: calc((100cqi - 1.25rem) / 2);
+      scroll-snap-align: start;
     }
   }
 
@@ -201,6 +201,7 @@ import MotionReveal from "@components/islands/MotionReveal";
     };
 
     const nudge = (deltaY: number) => {
+      if (isMobile()) return false;
       const span = travel();
       if (span <= 0 || deltaY === 0) return false;
 
@@ -298,6 +299,11 @@ import MotionReveal from "@components/islands/MotionReveal";
 
     window.addEventListener("resize", () => {
       gsap.killTweensOf(motion);
+      if (isMobile()) {
+        reset();
+        releaseScroll();
+        return;
+      }
       const span = travel();
       offset = clampStep(Math.min(offset, span));
       target = offset;

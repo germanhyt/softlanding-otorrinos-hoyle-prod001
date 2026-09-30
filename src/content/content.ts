@@ -35,8 +35,8 @@ export const hero = {
     alt: "Médico otorrino de Hoyle Otorrinos evaluando a una paciente",
   },
   stats: [
-    { value: "+60", label: "Años de experiencia" },
-    { value: "+20000", label: "Pacientes atendidos" },
+    { value: "+40", label: "Años de experiencia" },
+    { value: "+100 mil", label: "Pacientes atendidos" },
     { value: "", label: "Especialistas certificados" },
     { value: "100%", label: "Compromiso con el paciente" },
   ],

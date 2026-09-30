@@ -13,11 +13,13 @@ export function buildWhatsAppUrl(
 
 export function parseCountToken(token: string) {
   const prefix = token.startsWith("+") ? "+" : "";
-  const suffix = token.endsWith("%")
-    ? "%"
-    : token.endsWith("+")
-      ? "+"
-      : "";
-  const value = Number(token.replace(/[^\d]/g, ""));
-  return { prefix, suffix, value, hasNumber: Number.isFinite(value) && token.length > 0 && /\d/.test(token) };
+  const numMatch = token.match(/\d+/);
+  const value = numMatch ? Number(numMatch[0]) : 0;
+  const suffix = token.replace(/^[^\d]*\d+/, "");
+  return {
+    prefix,
+    suffix,
+    value,
+    hasNumber: numMatch !== null && Number.isFinite(value),
+  };
 }

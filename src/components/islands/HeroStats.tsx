@@ -60,11 +60,14 @@ export default function HeroStats({ stats }: Props) {
   const active = inView || Boolean(reduceMotion);
 
   return (
-    <div ref={ref} className="hero-stats is-revealed ">
-      <div className="mx-auto w-full max-w-[92vw] px-4 xl:max-w-[1280px] 2xl:max-w-[1480px]">
-        <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4 lg:gap-5">
+    <div ref={ref} className="hero-stats is-revealed">
+      {/* div (contorno ovalado) */}
+      <div className="hero-stats-oval">
+        {/* div (group de labels con max width) */}
+        <div className="hero-stats-group">
+          {/* los divs de los labels (aún con efecto glass como estaba) */}
           {stats.map((item, index) => (
-            <motion.article
+            <motion.div
               key={item.label}
               initial={reduceMotion ? false : { opacity: 0, y: 28 }}
               animate={{ opacity: 1, y: 0 }}
@@ -73,7 +76,7 @@ export default function HeroStats({ stats }: Props) {
                 ease: easeOutSoft,
                 delay: reduceMotion ? 0 : 0.28 + index * 0.1,
               }}
-              className="hero-stat-card flex min-h-[6.5rem] flex-col items-center justify-center rounded-[20px] px-3 py-3 text-center text-[#0D1146] sm:min-h-[7.25rem] md:h-[127px] md:min-h-[127px]"
+              className="hero-stat-card flex min-h-[6.5rem] flex-col items-center justify-center rounded-[20px] px-3 py-3 text-center text-[#211E46] sm:min-h-[7.25rem] md:h-[127px] md:min-h-[127px]"
             >
               {item.value ? (
                 <p className="font-dm text-[1.65rem] font-bold leading-none tracking-tight tabular-nums sm:text-3xl md:text-[35px] md:leading-[28px]">
@@ -87,13 +90,13 @@ export default function HeroStats({ stats }: Props) {
               <p
                 className={
                   item.value
-                    ? "mt-2 max-w-[11rem] font-dm text-[0.85rem] font-bold leading-snug text-[#0D1146] md:text-[1.05rem] md:leading-[1.15]"
-                    : "max-w-[11rem] font-dm text-[1.05rem] font-bold leading-[1.15] text-[#0D1146] md:text-[1.24rem]"
+                    ? "mt-2 max-w-[11rem] font-dm text-[0.85rem] font-bold leading-snug text-[#211E46] md:text-[1.05rem] md:leading-[1.15]"
+                    : "max-w-[11rem] font-dm text-[1.05rem] font-bold leading-[1.15] text-[#211E46] md:text-[1.24rem]"
                 }
               >
                 {item.label}
               </p>
-            </motion.article>
+            </motion.div>
           ))}
         </div>
       </div>

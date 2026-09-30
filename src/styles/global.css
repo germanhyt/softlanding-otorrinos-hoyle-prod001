@@ -284,6 +284,8 @@
   bottom: 0;
   z-index: 30;
   transform: translateY(50%);
+  pointer-events: none;
+  padding: 0 1rem;
 }
 
 #nosotros {
@@ -297,6 +299,7 @@
   .hero-stats {
     transform: none;
     bottom: 1.25rem;
+    padding: 0 0.75rem;
   }
 }
 
@@ -306,13 +309,104 @@
   }
 }
 
+.hero-stats-oval {
+  position: relative;
+  width: 100%;
+  max-width: 96vw;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0.625rem;
+  border-radius: 1.75rem;
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-stats-oval::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 1.75rem;
+  background: linear-gradient(
+    90deg,
+    #ffffff 11%,
+    #ffffff 26%,
+    #f6f6f6 80%,
+    #999999 98%
+  );
+  filter: blur(32px);
+  -webkit-filter: blur(32px);
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.95;
+}
+
+@media (min-width: 768px) {
+  .hero-stats-oval {
+    max-width: 1328px;
+    height: 167px;
+    padding: 0 1.5rem;
+    border-radius: 50%;
+  }
+
+  .hero-stats-oval::before {
+    inset: 4px 10px;
+    border-radius: 50%;
+    filter: blur(40px);
+    -webkit-filter: blur(40px);
+    opacity: 0.95;
+  }
+}
+
+.hero-stats-group {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .hero-stats-group {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.875rem;
+    max-width: 1060px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-stats-group {
+    gap: 1rem;
+    max-width: 1120px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .hero-stats-group {
+    gap: 1.25rem;
+    max-width: 1180px;
+  }
+}
+
 .hero-stat-card {
-  background: rgb(255 255 255 / 0.15);
-  border: 1px solid rgb(255 255 255 / 0.3);
-  color: #0d1146;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 8px 32px 0 rgb(31 38 135 / 0.1);
+  background: linear-gradient(
+    156deg,
+    rgba(255, 255, 255, 0.28) 0%,
+    rgba(255, 255, 255, 0.10) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  color: #211e46;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow:
+    0 8px 32px 0 rgba(31, 38, 135, 0.08),
+    inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.65);
+  border-radius: 20px;
 }
 
 html.js [data-motion-item]:not(.is-revealed),

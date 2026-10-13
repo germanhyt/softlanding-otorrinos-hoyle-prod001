@@ -696,5 +696,5 @@ export const footer = {
   explore: navLinks,
   phoneLabel: "Número de teléfono",
   emailLabel: "Correo electrónico",
-  copyright: "© 2026 · Hoyleotorrinos.pe",
+  copyright: "© 2026 · www.hoyleotorrinos.com.pe",
 } as const;

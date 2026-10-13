@@ -14,10 +14,15 @@ export function buildStructuredData(canonical: string) {
         description: seoConfig.description,
         image: seoConfig.openGraph.image,
         medicalSpecialty: "https://schema.org/Otolaryngologic",
+        address: {
+          "@type": "PostalAddress",
+          addressCountry: seoConfig.geo.region,
+        },
         areaServed: {
           "@type": "Country",
-          name: "Perú",
+          name: seoConfig.geo.country,
         },
+        availableLanguage: siteConfig.lang,
         ...(siteConfig.phone ? { telephone: siteConfig.phone } : {}),
         ...(siteConfig.email ? { email: siteConfig.email } : {}),
       },

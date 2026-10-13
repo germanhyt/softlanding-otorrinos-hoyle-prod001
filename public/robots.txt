@@ -19,4 +19,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://hoyleotorrinos.pe/sitemap-index.xml
+Sitemap: https://www.hoyleotorrinos.com.pe/sitemap-index.xml

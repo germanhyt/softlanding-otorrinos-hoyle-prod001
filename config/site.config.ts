@@ -4,7 +4,7 @@
 export const siteConfig = {
   name: "Hoyle Otorrinos",
   legalName: "Hoyle Otorrinos",
-  siteUrl: "https://hoyleotorrinos.pe",
+  siteUrl: "https://www.hoyleotorrinos.com.pe",
   lang: "es-PE",
   locale: "es_PE",
   ctaHref: "#contacto",

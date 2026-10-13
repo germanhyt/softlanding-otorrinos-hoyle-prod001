@@ -36,8 +36,9 @@ export const seoConfig = {
     siteName: siteConfig.name,
     image: ogImage,
     imagePath: ogImagePath,
-    imageWidth: 1440,
-    imageHeight: 630,
+    imageWidth: 3268,
+    imageHeight: 1663,
+    imageType: "image/webp",
     imageAlt:
       "Médico otorrino de Hoyle Otorrinos realizando una evaluación clínica",
   },
@@ -48,9 +49,13 @@ export const seoConfig = {
     image: ogImage,
   },
   hreflang: [
-    { lang: "es-PE", href: siteConfig.siteUrl },
-    { lang: "x-default", href: siteConfig.siteUrl },
+    { lang: "es-PE", href: `${siteConfig.siteUrl}/` },
+    { lang: "x-default", href: `${siteConfig.siteUrl}/` },
   ],
+  geo: {
+    region: "PE",
+    country: "Perú",
+  },
 } as const;
 
 export type SeoConfig = typeof seoConfig;

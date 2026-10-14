@@ -8,7 +8,7 @@ export const siteConfig = {
   lang: "es-PE",
   locale: "es_PE",
   ctaHref: "#contacto",
-  whatsapp: "",
+  whatsapp: "51999342480",
   phone: "",
   email: "",
 } as const;

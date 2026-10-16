@@ -8,7 +8,7 @@ export const siteConfig = {
   lang: "es-PE",
   locale: "es_PE",
   ctaHref: "#contacto",
-  whatsapp: "51999342480",
+  whatsapp: "+51 1 7123456",
   phone: "01 7123456",
   phoneTel: "+5117123456",
   email: "citas@jockeysalud.com.pe",

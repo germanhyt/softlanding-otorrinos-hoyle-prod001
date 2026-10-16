@@ -16,14 +16,18 @@ export function buildStructuredData(canonical: string) {
         medicalSpecialty: "https://schema.org/Otolaryngologic",
         address: {
           "@type": "PostalAddress",
-          addressCountry: seoConfig.geo.region,
+          streetAddress: siteConfig.place.street,
+          addressLocality: siteConfig.place.locality,
+          addressRegion: siteConfig.place.region,
+          postalCode: siteConfig.place.postalCode,
+          addressCountry: siteConfig.place.country,
         },
         areaServed: {
           "@type": "Country",
           name: seoConfig.geo.country,
         },
         availableLanguage: siteConfig.lang,
-        ...(siteConfig.phone ? { telephone: siteConfig.phone } : {}),
+        ...(siteConfig.phoneTel ? { telephone: siteConfig.phoneTel } : {}),
         ...(siteConfig.email ? { email: siteConfig.email } : {}),
       },
       {

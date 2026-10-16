@@ -1,5 +1,26 @@
-const DEFAULT_WA_MESSAGE =
-  "Hola, quiero agendar una cita en Hoyle Otorrinos.";
+const DOCTORS_LINE = "Consulta por los doctores Roger Hoyle y Connan Hoyle.";
+
+export const DEFAULT_WA_MESSAGE = [
+  "Hola, quiero agendar una cita en Hoyle Otorrinos.",
+  DOCTORS_LINE,
+].join("\n");
+
+export function appointmentWhatsAppMessage(details?: {
+  specialty: string;
+  attention: string;
+  message: string;
+}): string {
+  if (!details) return DEFAULT_WA_MESSAGE;
+  return [
+    "Hola, quiero agendar una cita en Hoyle Otorrinos.",
+    DOCTORS_LINE,
+    "",
+    `Especialidad: ${details.specialty}`,
+    `Tipo de atención: ${details.attention}`,
+    "",
+    details.message.trim(),
+  ].join("\n");
+}
 
 export function buildWhatsAppUrl(
   phone: string,

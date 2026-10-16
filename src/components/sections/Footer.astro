@@ -2,13 +2,14 @@
 import { siteConfig } from "@config/site.config";
 import { footer, logos } from "@content/content";
 
-const phone = siteConfig.phone;
-const email = siteConfig.email;
+const { phone, phoneTel, email, place } = siteConfig;
+const placeLine = `${place.street}, ${place.locality} ${place.postalCode}`;
+const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${place.name} ${placeLine}`)}`;
 ---
 
 <footer class="bg-[#0D1146] text-white">
   <div class="container py-12 md:py-14 lg:py-16">
-    <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-12 lg:gap-x-8">
+    <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-12 lg:gap-x-10">
       <div class="sm:col-span-2 lg:col-span-5">
         <a href="#inicio" class="inline-flex" aria-label="Hoyle Otorrinos — inicio">
           <img
@@ -19,12 +20,12 @@ const email = siteConfig.email;
             height="42"
           />
         </a>
-        <p class="mt-5 max-w-[17.5rem] font-dm text-sm leading-[1.55] text-white/75">
+        <p class="mt-5 max-w-[16.5rem] font-dm text-sm leading-[1.55] text-white/75">
           {footer.tagline}
         </p>
       </div>
 
-      <nav class="lg:col-span-4" aria-label={footer.exploreTitle}>
+      <nav class="lg:col-span-3" aria-label={footer.exploreTitle}>
         <p class="font-dm text-sm font-semibold text-white/50">{footer.exploreTitle}</p>
         <ul class="mt-4 flex flex-col gap-3">
           {
@@ -42,32 +43,36 @@ const email = siteConfig.email;
         </ul>
       </nav>
 
-      <div class="lg:col-span-3">
+      <div class="lg:col-span-4">
         <p class="font-dm text-sm font-semibold text-white/50">{footer.contactTitle}</p>
-        <ul class="mt-4 flex flex-col gap-3 font-dm text-sm text-white/80">
+        <ul class="mt-4 flex flex-col gap-3 font-dm text-sm text-white/85">
           <li>
-            {
-              phone ? (
-                <a href={`tel:${phone}`} class="transition hover:text-white">
-                  {phone}
-                </a>
-              ) : (
-                <span>{footer.phoneLabel}</span>
-              )
-            }
+            <a href={`tel:${phoneTel}`} class="transition hover:text-white">
+              {phone}
+            </a>
           </li>
           <li>
-            {
-              email ? (
-                <a href={`mailto:${email}`} class="transition hover:text-white">
-                  {email}
-                </a>
-              ) : (
-                <span>{footer.emailLabel}</span>
-              )
-            }
+            <a href={`mailto:${email}`} class="transition hover:text-white">
+              {email}
+            </a>
           </li>
         </ul>
+
+        <p class="mt-8 font-dm text-sm font-semibold text-white/50">{footer.placeTitle}</p>
+        <a
+          href={mapsHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mt-4 inline-flex max-w-xs flex-col gap-2 font-dm text-sm text-white/85 transition hover:text-white"
+        >
+          <span class="inline-flex items-center gap-2">
+            <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2.25c-3.73 0-6.75 2.95-6.75 6.6 0 4.95 6.75 12.9 6.75 12.9s6.75-7.95 6.75-12.9c0-3.65-3.02-6.6-6.75-6.6Zm0 8.85a2.25 2.25 0 1 1 0-4.5 2.25 2.25 0 0 1 0 4.5Z"></path>
+            </svg>
+            {place.name}
+          </span>
+          <span class="leading-relaxed">{placeLine}</span>
+        </a>
       </div>
     </div>
 
@@ -75,15 +80,9 @@ const email = siteConfig.email;
       class="mt-12 flex flex-col gap-3 border-t border-white/20 pt-5 font-dm text-sm text-white/65 sm:flex-row sm:items-center sm:justify-between"
     >
       <p>{footer.copyright}</p>
-      {
-        email ? (
-          <a href={`mailto:${email}`} class="transition hover:text-white">
-            {email}
-          </a>
-        ) : (
-          <span>{footer.emailLabel}</span>
-        )
-      }
+      <a href={`mailto:${email}`} class="transition hover:text-white">
+        {footer.emailLabel}
+      </a>
     </div>
   </div>
 </footer>

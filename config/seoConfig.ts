@@ -55,6 +55,7 @@ export const seoConfig = {
   geo: {
     region: "PE",
     country: "Perú",
+    placename: "Santiago de Surco",
   },
 } as const;
 

@@ -15,7 +15,7 @@ import Articulos from "@components/sections/Articulos.astro";
 import Faq from "@components/sections/Faq.astro";
 import Footer from "@components/sections/Footer.astro";
 import WhatsAppButton from "@components/islands/WhatsAppButton";
-import { siteConfig } from "@config/site.config";
+import ContactNotice from "@components/islands/ContactNotice";
 ---
 
 <Layout>
@@ -35,5 +35,6 @@ import { siteConfig } from "@config/site.config";
     <Faq />
   </main>
   <Footer />
-  <WhatsAppButton client:load phone={siteConfig.whatsapp} />
+  <WhatsAppButton client:load />
+  <ContactNotice client:load />
 </Layout>

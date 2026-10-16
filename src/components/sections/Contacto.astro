@@ -1,5 +1,4 @@
 ---
-import { siteConfig } from "@config/site.config";
 import { contacto } from "@content/content";
 import MotionReveal from "@components/islands/MotionReveal";
 import ContactForm from "@components/islands/ContactForm";
@@ -28,7 +27,6 @@ import ContactForm from "@components/islands/ContactForm";
         <div class="rounded-[1.5rem] bg-[#F3F1F8] px-5 py-6 sm:px-7 sm:py-7 lg:px-8 lg:py-8">
           <ContactForm
             client:visible
-            whatsapp={siteConfig.whatsapp}
             specialties={contacto.specialties}
             attentionTypes={contacto.attentionTypes}
             fields={contacto.fields}

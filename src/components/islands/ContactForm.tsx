@@ -1,9 +1,9 @@
 import { useState, type FormEvent } from "react";
 import Swal from "sweetalert2";
-import { buildWhatsAppUrl } from "@utils/helpers";
+import { openContactNotice } from "@lib/contact-notice";
+import { appointmentWhatsAppMessage } from "@utils/helpers";
 
 type Props = {
-  whatsapp: string;
   specialties: readonly string[];
   attentionTypes: readonly string[];
   fields: {
@@ -20,7 +20,6 @@ const fieldClass =
   "w-full rounded-2xl border border-[#D9D6E3] bg-white px-4 py-3.5 text-sm text-brand-navy placeholder:text-[#8B8AA0] transition focus:border-[#7C63C9] focus:outline-none sm:px-5 sm:text-[0.95rem]";
 
 export default function ContactForm({
-  whatsapp,
   specialties,
   attentionTypes,
   fields,
@@ -45,18 +44,12 @@ export default function ContactForm({
       return;
     }
 
-    const composed = [
-      "Hola, quiero agendar una cita en Hoyle Otorrinos.",
-      "",
-      `Especialidad: ${specialty}`,
-      `Tipo de atención: ${attention}`,
-      "",
-      message.trim(),
-    ].join("\n");
-
-    const url = buildWhatsAppUrl(whatsapp, composed);
-    const opened = window.open(url, "_blank", "noopener,noreferrer");
-    if (!opened) window.location.href = url;
+    const composed = appointmentWhatsAppMessage({
+      specialty,
+      attention,
+      message,
+    });
+    openContactNotice(composed);
   };
 
   return (

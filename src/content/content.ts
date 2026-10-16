@@ -688,13 +688,30 @@ export const faq = {
   ],
 } as const;
 
+export const contactNotice = {
+  title: "Nota importante",
+  lead: "Al comunicarte por llamada o WhatsApp, consulta por los",
+  doctors: "doctores Roger Hoyle y Connan Hoyle",
+  tail: ", responsables de los servicios médicos que se presentan en esta web.",
+  callLabel: "Llamar",
+  whatsappLabel: "Escribir por whatsapp",
+  closeLabel: "Cerrar",
+} as const;
+
 export const footer = {
   tagline:
-    "Otorrinos para niños y adultos. Diagnóstico preciso y trato cercano en cada consulta.",
+    "Otorrinolaringólogos para niños y adultos. Diagnóstico preciso y trato cercano en cada consulta.",
   exploreTitle: "Explora",
   contactTitle: "Contacto",
-  explore: navLinks,
-  phoneLabel: "Número de teléfono",
-  emailLabel: "Correo electrónico",
+  placeTitle: "Lugar de atención",
+  explore: [
+    { label: "Nosotros", href: "#nosotros" },
+    { label: "Servicios", href: "#servicios" },
+    { label: "Atención especializada", href: "#atencion" },
+    { label: "Septorrinoplastia", href: "#septorrinoplastia" },
+    { label: "Contáctanos", href: "#contacto" },
+    { label: "Preguntas frecuentes", href: "#faq" },
+  ],
   copyright: "© 2026 · www.hoyleotorrinos.com.pe",
+  emailLabel: "Correo electrónico",
 } as const;
